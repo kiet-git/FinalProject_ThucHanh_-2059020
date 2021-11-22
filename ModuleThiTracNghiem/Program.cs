@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ModuleSoanDe
+namespace ModuleThiTracNghiem
 {
     internal static class Program
     {
@@ -17,7 +17,7 @@ namespace ModuleSoanDe
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormSoanDe());
+            Application.Run(new FormThi());
         }
     }
 }

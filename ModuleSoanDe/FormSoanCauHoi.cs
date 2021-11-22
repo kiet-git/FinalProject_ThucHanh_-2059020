@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace ModuleSoanDe
 {
-    public partial class Form1 : Form
+    public partial class FormSoanCauHoi : Form
     {
-        public Form1()
+        public FormSoanCauHoi()
         {
             InitializeComponent();
         }
-
     }
 }
