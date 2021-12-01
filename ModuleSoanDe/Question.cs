@@ -37,19 +37,34 @@ namespace ModuleSoanDe
             }
         }
 
-        private int correctIndex;
+        private int _correctIndex;
 
-        private MultipleChoiceAnswers _listOfAnswers;
-
-        public MultipleChoiceAnswers ListOfAnswers
+        public int CorrectIndex
         {
             get
             {
-                return _listOfAnswers;
+                return _correctIndex;
             }
             set
             {
-                _listOfAnswers = value;
+                if(value >= 0 && value < _answers.getListCount())
+                {
+                    _correctIndex = value; 
+                } 
+            }
+        }
+
+        private MultipleChoiceAnswers _answers;
+
+        public MultipleChoiceAnswers Answers
+        {
+            get
+            {
+                return _answers;
+            }
+            set
+            {
+                _answers = value;
             }
         }
 
@@ -60,12 +75,20 @@ namespace ModuleSoanDe
                 Title = ""
             };
             _title = "";
-            _listOfAnswers = new MultipleChoiceAnswers();
+            _correctIndex = -1;
+            _answers = new MultipleChoiceAnswers();
         }
 
         public override string ToString()
         {
             return Title;
+        }
+
+        public string getCorrectAnswer()
+        {
+            if(this.CorrectIndex >= 0)  
+                return this.Answers.getAnswer(this.CorrectIndex).Answer;
+            return "";
         }
     }
 }

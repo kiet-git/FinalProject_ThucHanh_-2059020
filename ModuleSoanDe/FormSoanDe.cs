@@ -15,6 +15,10 @@ namespace ModuleSoanDe
         public FormSoanDe()
         {
             InitializeComponent();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
             FormSoanCauHoi fsch = new FormSoanCauHoi();
             fsch.ShowDialog();
         }

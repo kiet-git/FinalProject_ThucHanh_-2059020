@@ -25,7 +25,8 @@ namespace ModuleSoanDe
             if(q is not null)
             {
                 question = q;
-                listBoxAnswers.DataSource = question.ListOfAnswers.ListOfAnswers;
+                txtCorrectAnswer.Text = q.getCorrectAnswer();
+                listBoxAnswers.DataSource = question.Answers.ListOfAnswers;
             }
         }
 
@@ -34,14 +35,14 @@ namespace ModuleSoanDe
             selectedIndex = listBoxAnswers.SelectedIndex;
 
             if(selectedIndex > -1)
-                txtAnswer.Text = question.ListOfAnswers.getAnswer(selectedIndex).ToString();
+                txtAnswer.Text = question.Answers.getAnswer(selectedIndex).ToString();
         }
 
         private void btnAddA_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text))
             {
-                question.ListOfAnswers.addAnswer(new MultipleChoiceOption(txtAnswer.Text));
+                question.Answers.addAnswer(new MultipleChoiceOption(txtAnswer.Text));
                 txtAnswer.Text = "";
                 listBoxAnswers.SelectedIndex = -1;
             }
@@ -51,7 +52,7 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.ListOfAnswers.updateAnswer(txtAnswer.Text, selectedIndex);
+                question.Answers.updateAnswer(txtAnswer.Text, selectedIndex);
             }
         }
 
@@ -59,10 +60,25 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.ListOfAnswers.deleteAnswer(selectedIndex);
+                question.Answers.deleteAnswer(selectedIndex);
                 txtAnswer.Text = "";
                 listBoxAnswers.SelectedIndex = -1;
             }
+        }
+
+        private void btnMakeCorrect_Click(object sender, EventArgs e)
+        {
+            if(selectedIndex >= 0)
+            {
+                question.CorrectIndex = selectedIndex;
+                txtCorrectAnswer.Text = question.getCorrectAnswer();
+            }
+            else
+                MessageBox.Show(
+                   "Invalid option, please choose another answer",
+                   "Warning!",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
         }
     }
 }

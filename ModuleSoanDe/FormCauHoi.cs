@@ -4,8 +4,11 @@ using System.Drawing;
 
 namespace ModuleSoanDe
 {
-    internal partial class FormCauHoi : Form
+    public partial class FormCauHoi : Form
     {
+        public delegate void FormCauHoi_ExitHandle();
+        public event FormCauHoi_ExitHandle FormCauHoi_Exit;
+
         Question question;
 
         public FormCauHoi(Question q)
@@ -19,7 +22,7 @@ namespace ModuleSoanDe
             cmbxCategory.DataSource = question.Category.PotentialValue;
             cmbxCategory.SelectedItem = question.Category.Title;
             txtQuestion.Text = question.Title;
-            txtQuestion.Select();
+            txtQuestion.Select(); 
         }
 
         private void FormCauHoi_Load(object sender, EventArgs e)
@@ -29,18 +32,19 @@ namespace ModuleSoanDe
             this.Controls.Add(uscInputAnswer);
         }
 
-        private void saveData()
+        private bool saveData()
         {
             if (cmbxCategory.SelectedIndex < 0
                || String.IsNullOrEmpty(txtQuestion.Text)
-               || question.ListOfAnswers.checkEmpty())
+               || question.Answers.checkEmpty()
+               || question.CorrectIndex < 0)
             {
                 MessageBox.Show(
                     "Field Empty! Please enter data for all fields",
                     "Warning!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
             question.Category = new Category()
@@ -49,6 +53,14 @@ namespace ModuleSoanDe
             };
 
             question.Title = txtQuestion.Text;
+
+            MessageBox.Show(
+              "Your question is saved successfully",
+              "Information!",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Information);
+
+            return true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -58,8 +70,22 @@ namespace ModuleSoanDe
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            saveData();
-            this.Close();
+            if (!saveData())
+            {
+                DialogResult dr = MessageBox.Show("Do you want to quit? Your data will not be saved.", 
+                    "Information!", 
+                    MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Question);
+
+                if (dr == DialogResult.Yes)
+                {
+                    FormCauHoi_Exit();
+                    this.Close();
+                }
+            } else
+            {
+                this.Close();
+            }
         }
     }
 }

@@ -1,1 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<storage numberOfQuestion="4">
+  <question correctIndex="1" numberOfAnswer="2">
+    <category>Bảo mật</category>
+    <title>fdgfg</title>
+    <answer>
+      <option>dfgdfg</option>
+      <option>dgdfg</option>
+    </answer>
+  </question>
+  <question correctIndex="1" numberOfAnswer="2">
+    <category>Phần mềm</category>
+    <title>jhkjkhhh</title>
+    <answer>
+      <option>jhkjhkjhk</option>
+      <option>jkljllkjlk</option>
+    </answer>
+  </question>
+</storage>

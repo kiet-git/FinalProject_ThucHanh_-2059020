@@ -72,5 +72,10 @@ namespace ModuleSoanDe
         {
             return _listOfAnswers.Count == 0;
         }
+
+        public int getListCount()
+        {
+            return _listOfAnswers.Count;
+        }
     }
 }
