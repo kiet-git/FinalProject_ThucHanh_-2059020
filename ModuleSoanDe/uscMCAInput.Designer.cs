@@ -30,16 +30,16 @@ namespace ModuleSoanDe
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMakeCorrect = new System.Windows.Forms.Button();
             this.btnDeleteA = new System.Windows.Forms.Button();
             this.btnUpdateA = new System.Windows.Forms.Button();
             this.btnAddA = new System.Windows.Forms.Button();
             this.listBoxAnswers = new System.Windows.Forms.ListBox();
+            this.txtCorrectAnswer = new System.Windows.Forms.TextBox();
             this.txtAnswer = new System.Windows.Forms.TextBox();
             this.lbListOfA = new System.Windows.Forms.Label();
-            this.lbAnswer = new System.Windows.Forms.Label();
             this.lbCorrectIndex = new System.Windows.Forms.Label();
-            this.txtCorrectAnswer = new System.Windows.Forms.TextBox();
-            this.btnMakeCorrect = new System.Windows.Forms.Button();
+            this.lbAnswer = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,18 @@ namespace ModuleSoanDe
             this.groupBox1.Size = new System.Drawing.Size(769, 369);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // btnMakeCorrect
+            // 
+            this.btnMakeCorrect.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnMakeCorrect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnMakeCorrect.Location = new System.Drawing.Point(578, 99);
+            this.btnMakeCorrect.Name = "btnMakeCorrect";
+            this.btnMakeCorrect.Size = new System.Drawing.Size(177, 34);
+            this.btnMakeCorrect.TabIndex = 15;
+            this.btnMakeCorrect.Text = "Make Correct";
+            this.btnMakeCorrect.UseVisualStyleBackColor = true;
+            this.btnMakeCorrect.Click += new System.EventHandler(this.btnMakeCorrect_Click);
             // 
             // btnDeleteA
             // 
@@ -106,6 +118,7 @@ namespace ModuleSoanDe
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxAnswers.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listBoxAnswers.FormattingEnabled = true;
+            this.listBoxAnswers.HorizontalScrollbar = true;
             this.listBoxAnswers.ItemHeight = 25;
             this.listBoxAnswers.Location = new System.Drawing.Point(11, 200);
             this.listBoxAnswers.Name = "listBoxAnswers";
@@ -113,6 +126,17 @@ namespace ModuleSoanDe
             this.listBoxAnswers.Size = new System.Drawing.Size(744, 154);
             this.listBoxAnswers.TabIndex = 12;
             this.listBoxAnswers.SelectedIndexChanged += new System.EventHandler(this.listBoxAnswers_SelectedIndexChanged);
+            // 
+            // txtCorrectAnswer
+            // 
+            this.txtCorrectAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCorrectAnswer.Enabled = false;
+            this.txtCorrectAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCorrectAnswer.Location = new System.Drawing.Point(175, 94);
+            this.txtCorrectAnswer.Name = "txtCorrectAnswer";
+            this.txtCorrectAnswer.Size = new System.Drawing.Size(381, 39);
+            this.txtCorrectAnswer.TabIndex = 11;
             // 
             // txtAnswer
             // 
@@ -134,16 +158,6 @@ namespace ModuleSoanDe
             this.lbListOfA.TabIndex = 9;
             this.lbListOfA.Text = "List of answers";
             // 
-            // lbAnswer
-            // 
-            this.lbAnswer.AutoSize = true;
-            this.lbAnswer.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbAnswer.Location = new System.Drawing.Point(83, 37);
-            this.lbAnswer.Name = "lbAnswer";
-            this.lbAnswer.Size = new System.Drawing.Size(86, 30);
-            this.lbAnswer.TabIndex = 10;
-            this.lbAnswer.Text = "Answer";
-            // 
             // lbCorrectIndex
             // 
             this.lbCorrectIndex.AutoSize = true;
@@ -154,28 +168,15 @@ namespace ModuleSoanDe
             this.lbCorrectIndex.TabIndex = 10;
             this.lbCorrectIndex.Text = "Correct Answer";
             // 
-            // txtCorrectAnswer
+            // lbAnswer
             // 
-            this.txtCorrectAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCorrectAnswer.Enabled = false;
-            this.txtCorrectAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCorrectAnswer.Location = new System.Drawing.Point(175, 94);
-            this.txtCorrectAnswer.Name = "txtCorrectAnswer";
-            this.txtCorrectAnswer.Size = new System.Drawing.Size(381, 39);
-            this.txtCorrectAnswer.TabIndex = 11;
-            // 
-            // btnMakeCorrect
-            // 
-            this.btnMakeCorrect.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnMakeCorrect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMakeCorrect.Location = new System.Drawing.Point(578, 99);
-            this.btnMakeCorrect.Name = "btnMakeCorrect";
-            this.btnMakeCorrect.Size = new System.Drawing.Size(177, 34);
-            this.btnMakeCorrect.TabIndex = 15;
-            this.btnMakeCorrect.Text = "Make Correct";
-            this.btnMakeCorrect.UseVisualStyleBackColor = true;
-            this.btnMakeCorrect.Click += new System.EventHandler(this.btnMakeCorrect_Click);
+            this.lbAnswer.AutoSize = true;
+            this.lbAnswer.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbAnswer.Location = new System.Drawing.Point(83, 37);
+            this.lbAnswer.Name = "lbAnswer";
+            this.lbAnswer.Size = new System.Drawing.Size(86, 30);
+            this.lbAnswer.TabIndex = 10;
+            this.lbAnswer.Text = "Answer";
             // 
             // uscMCAInput
             // 

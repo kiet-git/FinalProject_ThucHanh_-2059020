@@ -47,36 +47,33 @@ namespace ModuleSoanDe
             }
             set
             {
-                if(value >= 0 && value < _answers.getListCount())
+                if(value >= 0 && value < AnswerCollection.Size)
                 {
                     _correctIndex = value; 
                 } 
             }
         }
 
-        private MultipleChoiceAnswers _answers;
+        private MultipleChoiceAnswers _answerCollection;
 
-        public MultipleChoiceAnswers Answers
+        public MultipleChoiceAnswers AnswerCollection
         {
             get
             {
-                return _answers;
+                return _answerCollection;
             }
             set
             {
-                _answers = value;
+                _answerCollection = value;
             }
         }
 
         public Question()
         {
-            _category = new Category()
-            {
-                Title = ""
-            };
+            _category = new Category();
             _title = "";
             _correctIndex = -1;
-            _answers = new MultipleChoiceAnswers();
+            AnswerCollection = new MultipleChoiceAnswers();
         }
 
         public override string ToString()
@@ -87,8 +84,26 @@ namespace ModuleSoanDe
         public string getCorrectAnswer()
         {
             if(this.CorrectIndex >= 0)  
-                return this.Answers.getAnswer(this.CorrectIndex).Answer;
+                return this.AnswerCollection.getAnswer(this.CorrectIndex);
             return "";
+        }
+
+        public bool checkEqual(Question q)
+        {
+            if(q.Category.Title == this.Category.Title 
+               && q.Title == this.Title
+               && q.CorrectIndex == this.CorrectIndex)
+            {
+                for(int i = 0; i < AnswerCollection.Size; i++)
+                {
+                    if(AnswerCollection.ListOfAnswers[i].Answer != q.AnswerCollection.ListOfAnswers[i].Answer)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

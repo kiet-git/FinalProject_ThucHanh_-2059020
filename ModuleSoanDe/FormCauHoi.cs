@@ -7,9 +7,10 @@ namespace ModuleSoanDe
     public partial class FormCauHoi : Form
     {
         public delegate void FormCauHoi_ExitHandle();
-        public event FormCauHoi_ExitHandle FormCauHoi_Exit;
+        public event FormCauHoi_ExitHandle FormCauHoi_ExitWithoutSave;
 
         Question question;
+        uscMCAInput uscInputAnswer;
 
         public FormCauHoi(Question q)
         {
@@ -19,6 +20,7 @@ namespace ModuleSoanDe
                 q = new Question();
             }
             question = q;
+            uscInputAnswer = new uscMCAInput(question);
             cmbxCategory.DataSource = question.Category.PotentialValue;
             cmbxCategory.SelectedItem = question.Category.Title;
             txtQuestion.Text = question.Title;
@@ -27,16 +29,24 @@ namespace ModuleSoanDe
 
         private void FormCauHoi_Load(object sender, EventArgs e)
         {
-            uscMCAInput uscInputAnswer = new uscMCAInput(question);
             uscInputAnswer.Location = new Point(13, 130);
+            uscInputAnswer.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top;
             this.Controls.Add(uscInputAnswer);
+        }
+
+        public void lockForm()
+        {
+            cmbxCategory.Enabled = false;
+            txtQuestion.Enabled = false;
+            btnSave.Enabled = false;
+            uscInputAnswer.lockUserControl();
         }
 
         private bool saveData()
         {
             if (cmbxCategory.SelectedIndex < 0
                || String.IsNullOrEmpty(txtQuestion.Text)
-               || question.Answers.checkEmpty()
+               || question.AnswerCollection.Size == 0
                || question.CorrectIndex < 0)
             {
                 MessageBox.Show(
@@ -79,7 +89,7 @@ namespace ModuleSoanDe
 
                 if (dr == DialogResult.Yes)
                 {
-                    FormCauHoi_Exit();
+                    FormCauHoi_ExitWithoutSave();
                     this.Close();
                 }
             } else

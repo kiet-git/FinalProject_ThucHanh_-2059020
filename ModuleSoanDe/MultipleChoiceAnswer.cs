@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ModuleSoanDe
 {
@@ -7,6 +8,14 @@ namespace ModuleSoanDe
     {
 
         private BindingList<MultipleChoiceOption> _listOfAnswers;
+
+        public int Size
+        {
+            get
+            {
+                return _listOfAnswers.Count;
+            }
+        }
 
         public MultipleChoiceAnswers()
         {
@@ -19,19 +28,12 @@ namespace ModuleSoanDe
             {
                 return _listOfAnswers;
             }
-            set
-            {
-                if (value.Count >= 0)
-                {
-                    _listOfAnswers = value;
-                }
-            }
         }
 
-        public MultipleChoiceOption getAnswer(int index)
+        public string getAnswer(int index)
         {
             if (index >= 0)
-                return _listOfAnswers[index];
+                return _listOfAnswers[index].Answer;
             return null;
         }
 
@@ -68,14 +70,9 @@ namespace ModuleSoanDe
             return false;
         }
 
-        public bool checkEmpty()
+        public void setDatasource(ListBox lb)
         {
-            return _listOfAnswers.Count == 0;
-        }
-
-        public int getListCount()
-        {
-            return _listOfAnswers.Count;
+            lb.DataSource = _listOfAnswers;
         }
     }
 }

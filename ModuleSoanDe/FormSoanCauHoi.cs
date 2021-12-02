@@ -1,13 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace ModuleSoanDe
 {
     public partial class FormSoanCauHoi : Form
     {
-        BindingList<Question> listOfQuestions = new BindingList<Question>();
+        QuestionCollection questionCollection = new QuestionCollection(new NormalXMLExecuter());
+        string filePath = @"\\Mac\Home\Desktop\FinalProject_ThucHanh_ 2059020\ModuleSoanDe\dataQuestion.xml";
 
         int selectedIndex = -1;
         bool isSaved = false;
@@ -15,17 +14,13 @@ namespace ModuleSoanDe
         public FormSoanCauHoi()
         {
             InitializeComponent();
-            listBoxQuestions.DataSource = listOfQuestions;
+            questionCollection.readXML(filePath);
+            questionCollection.setDatasource(listBoxQuestions);
         }
 
         private void btnAddQ_Click(object sender, EventArgs e)
         {
-            Question q = new Question();
-            listOfQuestions.Add(q);
-            FormCauHoi fsch = new FormCauHoi(q);
-            fsch.FormCauHoi_Exit += new FormCauHoi.FormCauHoi_ExitHandle(formCauHoi_Exit);
-            fsch.ShowDialog();
-            listOfQuestions.ResetBindings();
+            questionCollection.addQuestion();
             listBoxQuestions.SelectedIndex = -1;
             isSaved = false;
         }
@@ -34,9 +29,7 @@ namespace ModuleSoanDe
         {
             if(selectedIndex > -1)
             {
-                FormCauHoi fsch = new FormCauHoi(listOfQuestions[selectedIndex]);
-                fsch.ShowDialog();
-                listOfQuestions.ResetBindings();
+                questionCollection.updateQuestion(selectedIndex);
                 isSaved = false;
             }
         }
@@ -45,8 +38,7 @@ namespace ModuleSoanDe
         {
             if(selectedIndex > -1)
             {
-                listOfQuestions.RemoveAt(selectedIndex);
-                listOfQuestions.ResetBindings();
+                questionCollection.deleteQuestion(selectedIndex);
                 listBoxQuestions.SelectedIndex = -1;
                 isSaved = false;
             }
@@ -57,72 +49,40 @@ namespace ModuleSoanDe
             selectedIndex = listBoxQuestions.SelectedIndex;
         }
 
-        void formCauHoi_Exit()
-        {
-            listOfQuestions.RemoveAt(listOfQuestions.Count - 1);
-        }
-
         private void writeToXML()
         {
-            if (listOfQuestions.Count == 0)
+            if (isSaved || questionCollection.Size == 0)
                 return;
 
-            string filePath = @"\\Mac\Home\Desktop\FinalProject_ThucHanh_ 2059020\ModuleSoanDe\dataQuestion.xml";
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-
-            XmlElement storage = doc.DocumentElement;
-            if (storage is null)
-                storage = doc.CreateElement("storage");
-            storage.SetAttribute("numberOfQuestion", $"{int.Parse(storage.GetAttribute("numberOfQuestion")) + listOfQuestions.Count}");
-
-            foreach(var q in listOfQuestions)
-            {
-                XmlElement question = doc.CreateElement("question");
-                question.SetAttribute("correctIndex", $"{q.CorrectIndex}");
-                question.SetAttribute("numberOfAnswer", $"{q.Answers.getListCount()}");
-
-                XmlElement category = doc.CreateElement("category");
-                category.InnerText = q.Category.Title;
-
-                XmlElement title = doc.CreateElement("title");
-                title.InnerText = q.Title;
-
-                XmlElement answer = doc.CreateElement("answer");
-                foreach(var i in q.Answers.ListOfAnswers)
-                {
-                    XmlElement option = doc.CreateElement("option");
-                    option.InnerText = i.Answer;
-                    answer.AppendChild(option);
-                }
-
-                question.AppendChild(category);
-                question.AppendChild(title);
-                question.AppendChild(answer);
-                storage.AppendChild(question);
-            }
-
-            doc.Save(XmlWriter.Create(filePath, new XmlWriterSettings() { Indent = true }));
+            questionCollection.writeToXML(filePath);
             MessageBox.Show(
                  "Your data is saved successfully",
                  "Information!",
                  MessageBoxButtons.OK,
                  MessageBoxIcon.Information);
-        }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (!isSaved)
-                writeToXML();
             isSaved = true;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if(!isSaved)
+            DialogResult dr = MessageBox.Show(
+               "Do you want to save your data?",
+               "Information!",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Information);
+            
+            if (dr == DialogResult.Yes)
+            {
                 writeToXML();
+            }
+            
             this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            writeToXML();
         }
     }
 }

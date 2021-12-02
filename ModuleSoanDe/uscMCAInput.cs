@@ -26,8 +26,17 @@ namespace ModuleSoanDe
             {
                 question = q;
                 txtCorrectAnswer.Text = q.getCorrectAnswer();
-                listBoxAnswers.DataSource = question.Answers.ListOfAnswers;
+                question.AnswerCollection.setDatasource(listBoxAnswers);
             }
+        }
+
+        public void lockUserControl()
+        {
+            txtAnswer.Enabled = false;
+            btnAddA.Enabled = false;
+            btnUpdateA.Enabled = false;
+            btnDeleteA.Enabled = false;
+            btnMakeCorrect.Enabled = false;
         }
 
         private void listBoxAnswers_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,16 +44,20 @@ namespace ModuleSoanDe
             selectedIndex = listBoxAnswers.SelectedIndex;
 
             if(selectedIndex > -1)
-                txtAnswer.Text = question.Answers.getAnswer(selectedIndex).ToString();
+            {
+                txtAnswer.Text = question.AnswerCollection.getAnswer(selectedIndex);
+                txtAnswer.Select();
+            }
         }
 
         private void btnAddA_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text))
             {
-                question.Answers.addAnswer(new MultipleChoiceOption(txtAnswer.Text));
-                txtAnswer.Text = "";
+                question.AnswerCollection.addAnswer(new MultipleChoiceOption(txtAnswer.Text));
+                txtAnswer.Text = String.Empty;
                 listBoxAnswers.SelectedIndex = -1;
+                txtAnswer.Select();
             }
         }
 
@@ -52,7 +65,7 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.Answers.updateAnswer(txtAnswer.Text, selectedIndex);
+                question.AnswerCollection.updateAnswer(txtAnswer.Text, selectedIndex);
             }
         }
 
@@ -60,8 +73,15 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.Answers.deleteAnswer(selectedIndex);
-                txtAnswer.Text = "";
+                question.AnswerCollection.deleteAnswer(selectedIndex);
+
+                if(selectedIndex == question.CorrectIndex)
+                {
+                    question.CorrectIndex = -1;
+                    txtAnswer.Text = String.Empty; 
+                }
+
+                txtAnswer.Text = String.Empty;
                 listBoxAnswers.SelectedIndex = -1;
             }
         }
