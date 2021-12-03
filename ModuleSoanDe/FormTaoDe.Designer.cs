@@ -95,7 +95,7 @@ namespace ModuleSoanDe
             this.btnAddQ.Location = new System.Drawing.Point(330, 179);
             this.btnAddQ.Name = "btnAddQ";
             this.btnAddQ.Size = new System.Drawing.Size(129, 34);
-            this.btnAddQ.TabIndex = 19;
+            this.btnAddQ.TabIndex = 5;
             this.btnAddQ.Text = "Add Question";
             this.btnAddQ.UseVisualStyleBackColor = true;
             this.btnAddQ.Click += new System.EventHandler(this.btnAddQ_Click);
@@ -117,7 +117,7 @@ namespace ModuleSoanDe
             this.btnDelete.Location = new System.Drawing.Point(330, 232);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(129, 34);
-            this.btnDelete.TabIndex = 19;
+            this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -134,23 +134,22 @@ namespace ModuleSoanDe
             // 
             // txtNofQ
             // 
-            this.txtNofQ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNofQ.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtNofQ.Location = new System.Drawing.Point(243, 12);
             this.txtNofQ.Name = "txtNofQ";
             this.txtNofQ.Size = new System.Drawing.Size(147, 39);
-            this.txtNofQ.TabIndex = 20;
+            this.txtNofQ.TabIndex = 1;
             this.txtNofQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnRandom
             // 
-            this.btnRandom.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnRandom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRandom.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRandom.Location = new System.Drawing.Point(597, 9);
             this.btnRandom.Name = "btnRandom";
             this.btnRandom.Size = new System.Drawing.Size(181, 42);
-            this.btnRandom.TabIndex = 19;
+            this.btnRandom.TabIndex = 3;
             this.btnRandom.Text = "Randomize";
             this.btnRandom.UseVisualStyleBackColor = true;
             this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
@@ -162,31 +161,31 @@ namespace ModuleSoanDe
             this.btnClear.Location = new System.Drawing.Point(330, 285);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(129, 34);
-            this.btnClear.TabIndex = 19;
+            this.btnClear.TabIndex = 7;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.Location = new System.Drawing.Point(475, 357);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(144, 34);
-            this.btnSave.TabIndex = 19;
+            this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save to file";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnExit.Location = new System.Drawing.Point(636, 357);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(142, 34);
-            this.btnExit.TabIndex = 19;
+            this.btnExit.TabIndex = 11;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -198,25 +197,26 @@ namespace ModuleSoanDe
             this.btnView.Location = new System.Drawing.Point(330, 126);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(129, 34);
-            this.btnView.TabIndex = 19;
+            this.btnView.TabIndex = 4;
             this.btnView.Text = "View Question";
             this.btnView.UseVisualStyleBackColor = true;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // txtAvailable
             // 
-            this.txtAvailable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAvailable.Enabled = false;
             this.txtAvailable.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtAvailable.Location = new System.Drawing.Point(432, 12);
             this.txtAvailable.Name = "txtAvailable";
             this.txtAvailable.Size = new System.Drawing.Size(147, 39);
-            this.txtAvailable.TabIndex = 20;
+            this.txtAvailable.TabIndex = 2;
             this.txtAvailable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(396, 4);
@@ -227,6 +227,7 @@ namespace ModuleSoanDe
             // 
             // lbMonth
             // 
+            this.lbMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbMonth.AutoSize = true;
             this.lbMonth.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbMonth.Location = new System.Drawing.Point(12, 357);
@@ -237,17 +238,17 @@ namespace ModuleSoanDe
             // 
             // txtMonth
             // 
-            this.txtMonth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtMonth.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMonth.Location = new System.Drawing.Point(98, 352);
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(71, 39);
-            this.txtMonth.TabIndex = 20;
+            this.txtMonth.TabIndex = 8;
             this.txtMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbYear
             // 
+            this.lbYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbYear.AutoSize = true;
             this.lbYear.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbYear.Location = new System.Drawing.Point(183, 357);
@@ -258,13 +259,12 @@ namespace ModuleSoanDe
             // 
             // txtYear
             // 
-            this.txtYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtYear.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtYear.Location = new System.Drawing.Point(243, 352);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(71, 39);
-            this.txtYear.TabIndex = 20;
+            this.txtYear.TabIndex = 8;
             this.txtYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormTaoDe
@@ -293,6 +293,7 @@ namespace ModuleSoanDe
             this.Controls.Add(this.listBoxQIn);
             this.Name = "FormTaoDe";
             this.Text = "FormTaoDe";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTaoDe_FormClosing);
             this.Load += new System.EventHandler(this.FormTaoDe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

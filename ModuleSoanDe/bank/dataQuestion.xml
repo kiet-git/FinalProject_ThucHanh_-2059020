@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <storage numberOfQuestion="11">
-  <question correctIndex="0" numberOfAnswer="5">
+  <question questionNumber="0" correctIndex="0" numberOfAnswer="5">
     <category>Phần mềm</category>
     <title>Cau 1 - 1</title>
     <answer>
@@ -11,18 +11,17 @@
       <option>5</option>
     </answer>
   </question>
-  <question correctIndex="1" numberOfAnswer="5">
-    <category>Phần cứng</category>
+  <question questionNumber="1" correctIndex="1" numberOfAnswer="4">
+    <category>Phần mềm</category>
     <title>Cau 2 - 2</title>
     <answer>
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
-      <option>5</option>
     </answer>
   </question>
-  <question correctIndex="2" numberOfAnswer="3">
+  <question questionNumber="2" correctIndex="2" numberOfAnswer="3">
     <category>Phần mềm</category>
     <title>Cau 3 - 3</title>
     <answer>
@@ -31,7 +30,7 @@
       <option>3</option>
     </answer>
   </question>
-  <question correctIndex="3" numberOfAnswer="10">
+  <question questionNumber="3" correctIndex="3" numberOfAnswer="10">
     <category>Phần mềm</category>
     <title>Cau 4 - 4</title>
     <answer>
@@ -47,7 +46,7 @@
       <option>10</option>
     </answer>
   </question>
-  <question correctIndex="0" numberOfAnswer="2">
+  <question questionNumber="4" correctIndex="0" numberOfAnswer="2">
     <category>Phần mềm</category>
     <title>Cau 5 - 1</title>
     <answer>
@@ -55,7 +54,7 @@
       <option>2</option>
     </answer>
   </question>
-  <question correctIndex="1" numberOfAnswer="4">
+  <question questionNumber="5" correctIndex="1" numberOfAnswer="4">
     <category>Phần mềm</category>
     <title>Cau 6 - 2</title>
     <answer>
@@ -65,7 +64,7 @@
       <option>4</option>
     </answer>
   </question>
-  <question correctIndex="2" numberOfAnswer="12">
+  <question questionNumber="6" correctIndex="2" numberOfAnswer="12">
     <category>Bảo mật</category>
     <title>Cau 7 - 3</title>
     <answer>
@@ -83,7 +82,7 @@
       <option>12</option>
     </answer>
   </question>
-  <question correctIndex="3" numberOfAnswer="5">
+  <question questionNumber="7" correctIndex="3" numberOfAnswer="5">
     <category>Mạng</category>
     <title>Cau 8 - 4</title>
     <answer>
@@ -94,14 +93,14 @@
       <option>5</option>
     </answer>
   </question>
-  <question correctIndex="0" numberOfAnswer="1">
+  <question questionNumber="8" correctIndex="0" numberOfAnswer="1">
     <category>Phần cứng</category>
     <title>Cau 9 - 1</title>
     <answer>
       <option>1</option>
     </answer>
   </question>
-  <question correctIndex="1" numberOfAnswer="4">
+  <question questionNumber="9" correctIndex="1" numberOfAnswer="4">
     <category>Mạng</category>
     <title>Cau 10 - 2</title>
     <answer>
@@ -111,7 +110,7 @@
       <option>4</option>
     </answer>
   </question>
-  <question correctIndex="2" numberOfAnswer="4">
+  <question questionNumber="10" correctIndex="2" numberOfAnswer="4">
     <category>Phần mềm</category>
     <title>Cau 11 - 3</title>
     <answer>

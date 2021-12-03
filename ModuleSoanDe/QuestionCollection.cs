@@ -41,7 +41,7 @@ namespace ModuleSoanDe
         {
             get
             {
-                return _id;
+                return _month.ToString() + '-' + _year.ToString();
             }
         }
 
@@ -79,7 +79,7 @@ namespace ModuleSoanDe
             }
             _month = month;
             _year = year;
-            _id = _month.ToString() + '-' + _year.ToString();
+            _XMLExecuter = new TestXMLExecuter();
         }
 
         public void viewQuestion(int index)
@@ -152,14 +152,14 @@ namespace ModuleSoanDe
             _listOfQuestions.ResetBindings();
         }
 
-        public void writeToXML(string filePath)
+        public void writeToXML(string fileName)
         {
-            _XMLExecuter.writeQuestionCollection(this, filePath);
+            _XMLExecuter.writeQuestionCollection(this, fileName);
         }
 
-        public void readXML(string filePath)
+        public void readXML(string fileName)
         {
-            _XMLExecuter.readQuestionCollection(this, filePath);
+            _XMLExecuter.readQuestionCollection(this, fileName);
             _listOfQuestions.ResetBindings();
         }
 

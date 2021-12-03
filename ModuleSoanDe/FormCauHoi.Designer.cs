@@ -114,6 +114,7 @@
             this.Controls.Add(this.lbCategory);
             this.Name = "FormCauHoi";
             this.Text = "FormCauHoi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCauHoi_FormClosing);
             this.Load += new System.EventHandler(this.FormCauHoi_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -30,7 +30,7 @@ namespace ModuleSoanDe
         private void FormCauHoi_Load(object sender, EventArgs e)
         {
             uscInputAnswer.Location = new Point(13, 130);
-            uscInputAnswer.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top;
+            uscInputAnswer.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);  
             this.Controls.Add(uscInputAnswer);
         }
 
@@ -96,6 +96,11 @@ namespace ModuleSoanDe
             {
                 this.Close();
             }
+        }
+
+        private void FormCauHoi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormCauHoi_ExitWithoutSave();
         }
     }
 }

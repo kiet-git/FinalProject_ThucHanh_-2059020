@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ModuleSoanDe
@@ -6,15 +7,16 @@ namespace ModuleSoanDe
     public partial class FormSoanCauHoi : Form
     {
         QuestionCollection questionCollection = new QuestionCollection(new NormalXMLExecuter());
-        string filePath = @"\\Mac\Home\Desktop\FinalProject_ThucHanh_ 2059020\ModuleSoanDe\dataQuestion.xml";
+
+        string defaultPath = @"dataQuestion.xml";
 
         int selectedIndex = -1;
-        bool isSaved = false;
+        bool isSaved = true;
 
         public FormSoanCauHoi()
         {
             InitializeComponent();
-            questionCollection.readXML(filePath);
+            questionCollection.readXML(defaultPath);
             questionCollection.setDatasource(listBoxQuestions);
         }
 
@@ -52,9 +54,12 @@ namespace ModuleSoanDe
         private void writeToXML()
         {
             if (isSaved || questionCollection.Size == 0)
+            {
                 return;
+            }
 
-            questionCollection.writeToXML(filePath);
+            questionCollection.writeToXML(defaultPath);
+
             MessageBox.Show(
                  "Your data is saved successfully",
                  "Information!",
@@ -65,24 +70,27 @@ namespace ModuleSoanDe
         }
 
         private void btnExit_Click(object sender, EventArgs e)
-        {
-            DialogResult dr = MessageBox.Show(
-               "Do you want to save your data?",
-               "Information!",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Information);
-            
-            if (dr == DialogResult.Yes)
-            {
-                writeToXML();
-            }
-            
+        {  
             this.Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             writeToXML();
+        }
+
+        private void FormSoanCauHoi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show(
+               "Do you want to save your data?",
+               "Information!",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Information);
+
+            if (dr == DialogResult.Yes)
+            {
+                writeToXML();
+            }
         }
     }
 }

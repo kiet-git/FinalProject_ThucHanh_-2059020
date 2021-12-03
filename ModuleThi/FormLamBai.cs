@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModuleSoanDe;
 
-namespace ModuleThiTracNghiem
+namespace ModuleThi
 {
-    public partial class FormThi : Form
+    public partial class FormLamBai : Form
     {
-        public FormThi()
+        QuestionCollection testQuestion;
+        Test currentTest;
+
+        public FormLamBai(QuestionCollection qc, Test t)
         {
             InitializeComponent();
+            testQuestion = qc;
+            currentTest = t;
         }
     }
 }
