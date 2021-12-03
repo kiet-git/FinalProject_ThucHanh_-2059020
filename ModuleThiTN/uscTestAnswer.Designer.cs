@@ -1,14 +1,14 @@
 ﻿
-namespace ModuleThi
+namespace ModuleThiTN
 {
-    partial class FormLamBai
+    partial class uscTestAnswer
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -21,10 +21,10 @@ namespace ModuleThi
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -34,22 +34,24 @@ namespace ModuleThi
             // 
             // panelAnswer
             // 
+            this.panelAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAnswer.AutoScroll = true;
             this.panelAnswer.AutoScrollMargin = new System.Drawing.Size(0, 500);
             this.panelAnswer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAnswer.Location = new System.Drawing.Point(259, 137);
+            this.panelAnswer.Location = new System.Drawing.Point(3, 3);
             this.panelAnswer.Name = "panelAnswer";
             this.panelAnswer.Size = new System.Drawing.Size(529, 301);
-            this.panelAnswer.TabIndex = 0;
+            this.panelAnswer.TabIndex = 1;
             // 
-            // FormLamBai
+            // uscTestAnswer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panelAnswer);
-            this.Name = "FormLamBai";
-            this.Text = "FormLamBai";
+            this.Name = "uscTestAnswer";
+            this.Size = new System.Drawing.Size(537, 308);
             this.ResumeLayout(false);
 
         }

@@ -105,5 +105,15 @@ namespace ModuleSoanDe
             }
             return false;
         }
+
+        public bool checkEqual(Category c, string t)
+        {
+            if (this.Category.Title == c.Title
+               && this.Title == t)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

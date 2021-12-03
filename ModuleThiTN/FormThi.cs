@@ -1,8 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModuleSoanDe;
 
-namespace ModuleThi
+namespace ModuleThiTN
 {
     public partial class FormThi : Form
     {
@@ -19,7 +27,7 @@ namespace ModuleThi
 
         private void FormThi_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnChooseTest_Click(object sender, EventArgs e)
@@ -35,13 +43,14 @@ namespace ModuleThi
 
         private void btnBegin_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(filePath)) {
+            if (String.IsNullOrEmpty(filePath))
+            {
                 return;
             }
 
             testQuestion.readXML(filePath);
-
-            if(testQuestion.Size == 0 
+             
+            if (testQuestion.Size == 0
                 || String.IsNullOrEmpty(txtId.Text)
                 || String.IsNullOrEmpty(txtName.Text)
                 || String.IsNullOrEmpty(txtEmail.Text)
@@ -50,7 +59,7 @@ namespace ModuleThi
                 return;
             }
 
-            currentTest = new Test(new Employee(txtId.Text, txtName.Text, txtEmail.Text), testQuestion.Id);
+            currentTest = new Test(new Employee(txtId.Text, txtName.Text, txtEmail.Text), "");
             FormLamBai flb = new FormLamBai(testQuestion, currentTest);
             this.Hide();
             flb.Show();
@@ -59,6 +68,8 @@ namespace ModuleThi
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+            Process.GetCurrentProcess().Close();
         }
+
     }
 }

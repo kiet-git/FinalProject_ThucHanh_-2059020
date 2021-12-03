@@ -7,20 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModuleSoanDe;
 
-namespace ModuleThi
+namespace ModuleThiTN
 {
-    public partial class FormLamBai : Form
+    public partial class uscTestOption : UserControl
     {
-        QuestionCollection testQuestion;
-        Test currentTest;
-
-        public FormLamBai(QuestionCollection qc, Test t)
+        public uscTestOption()
         {
             InitializeComponent();
-            testQuestion = qc;
-            currentTest = t;
         }
     }
 }

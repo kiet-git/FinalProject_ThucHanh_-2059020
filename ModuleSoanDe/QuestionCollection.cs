@@ -140,17 +140,24 @@ namespace ModuleSoanDe
             _listOfQuestions.RemoveAt(_listOfQuestions.Count - 1);
         }
 
-        private void showFormCauHoi(Question q, bool locked)
+        private void resetBinding()
+        {
+            _listOfQuestions.ResetBindings();
+            MessageBox.Show(this.Size.ToString());
+        }
+
+        private void showFormCauHoi(Question q, bool isLocked)
         {
             FormCauHoi fsch = new FormCauHoi(q);
             fsch.FormCauHoi_ExitWithoutSave += new FormCauHoi.FormCauHoi_ExitHandle(removeEnd);
-            if (locked)
+            fsch.FormCauHoi_ExitNormal += new FormCauHoi.FormCauHoi_ExitHandle(resetBinding);
+            if (isLocked)
             {
                 fsch.lockForm();
             }
             fsch.ShowDialog();
-            _listOfQuestions.ResetBindings();
         }
+
 
         public void writeToXML(string fileName)
         {
@@ -196,10 +203,10 @@ namespace ModuleSoanDe
             {
                 if(q.checkEqual(q1))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }

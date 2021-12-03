@@ -10,4 +10,10 @@
     <ProjectReference Include="..\ModuleSoanDe\ModuleSoanDe.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="FormLamBai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -9,10 +9,18 @@ namespace ModuleSoanDe
         public delegate void FormCauHoi_ExitHandle();
         public event FormCauHoi_ExitHandle FormCauHoi_ExitWithoutSave;
 
+        public event FormCauHoi_ExitHandle FormCauHoi_ExitNormal;
+
+        QuestionCollection questionCollection;
         Question question;
         uscMCAInput uscInputAnswer;
 
         public FormCauHoi(Question q)
+        {
+            initializeForm(q);            
+        }
+
+        private void initializeForm(Question q)
         {
             InitializeComponent();
             if (q is null)
@@ -24,7 +32,7 @@ namespace ModuleSoanDe
             cmbxCategory.DataSource = question.Category.PotentialValue;
             cmbxCategory.SelectedItem = question.Category.Title;
             txtQuestion.Text = question.Title;
-            txtQuestion.Select(); 
+            txtQuestion.Select();
         }
 
         private void FormCauHoi_Load(object sender, EventArgs e)
@@ -80,27 +88,27 @@ namespace ModuleSoanDe
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void FormCauHoi_FormClosing(object sender, FormClosingEventArgs e)
+        {
             if (!saveData())
             {
-                DialogResult dr = MessageBox.Show("Do you want to quit? Your data will not be saved.", 
-                    "Information!", 
-                    MessageBoxButtons.YesNo, 
+                DialogResult dr = MessageBox.Show("Do you want to quit? Your data will not be saved.",
+                    "Information!",
+                    MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                 if (dr == DialogResult.Yes)
                 {
                     FormCauHoi_ExitWithoutSave();
-                    this.Close();
                 }
-            } else
-            {
-                this.Close();
             }
-        }
-
-        private void FormCauHoi_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            FormCauHoi_ExitWithoutSave();
+            else
+            {
+                FormCauHoi_ExitNormal();
+            }
         }
     }
 }

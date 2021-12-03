@@ -61,7 +61,7 @@ namespace ModuleSoanDe
             {
                 Question q = quesColInput.getQuestion(listBoxQIn.SelectedIndex);
                 if (listBoxQIn.SelectedIndex > -1
-                    && quesColOutput.checkEqual(q))
+                    && !quesColOutput.checkEqual(q))
                 {
                     quesColOutput.addQuestion(q);
                     isSaved = false;
