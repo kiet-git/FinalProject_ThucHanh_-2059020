@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModuleSoanDe;
 
 namespace ModuleThiTN
 {
@@ -12,13 +13,16 @@ namespace ModuleThiTN
 
         private string _testId;
 
-        List<int> _chosenIndex;
+        private QuestionCollection _questionCollection;
 
-        public Test(Employee e, string testId)
+        //private IXMLExecuter _XMLExecuter;
+
+        public Test(Employee e, string testId, QuestionCollection qc)
         {
             _employee = e;
-            _chosenIndex = new List<int>();
             _testId = testId;
+            _questionCollection = qc;
+            //_XMLExecuter = new EmployeeTestXMLExecuter();
         }
     }
 }

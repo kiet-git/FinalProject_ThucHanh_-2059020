@@ -54,6 +54,23 @@ namespace ModuleSoanDe
             }
         }
 
+        private int _chosenIndex;
+
+        public int ChosenIndex
+        {
+            get
+            {
+                return _chosenIndex;
+            }
+            set
+            {
+                if (value >= 0 && value < AnswerCollection.Size)
+                {
+                    _chosenIndex = value;
+                }
+            }
+        }
+
         private MultipleChoiceAnswers _answerCollection;
 
         public MultipleChoiceAnswers AnswerCollection
@@ -73,6 +90,7 @@ namespace ModuleSoanDe
             _category = new Category();
             _title = "";
             _correctIndex = -1;
+            _chosenIndex = -1;
             AnswerCollection = new MultipleChoiceAnswers();
         }
 
@@ -106,14 +124,9 @@ namespace ModuleSoanDe
             return false;
         }
 
-        public bool checkEqual(Category c, string t)
+        public bool isChosen()
         {
-            if (this.Category.Title == c.Title
-               && this.Title == t)
-            {
-                return true;
-            }
-            return false;
+            return _chosenIndex > -1;
         }
     }
 }

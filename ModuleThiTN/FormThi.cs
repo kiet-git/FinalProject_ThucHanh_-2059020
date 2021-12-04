@@ -59,16 +59,21 @@ namespace ModuleThiTN
                 return;
             }
 
-            currentTest = new Test(new Employee(txtId.Text, txtName.Text, txtEmail.Text), "");
+            currentTest = new Test(new Employee(txtId.Text, txtName.Text, txtEmail.Text), testQuestion.Id, testQuestion);
             FormLamBai flb = new FormLamBai(testQuestion, currentTest);
+            flb.FormLamBai_Exit += new FormLamBai.FormLamBai_ExitHandle(closeCurrent);
             this.Hide();
             flb.Show();
+        }
+
+        private void closeCurrent()
+        {
+            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-            Process.GetCurrentProcess().Close();
         }
 
     }

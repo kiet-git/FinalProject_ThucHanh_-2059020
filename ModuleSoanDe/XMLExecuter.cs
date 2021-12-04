@@ -225,7 +225,72 @@ namespace ModuleSoanDe
                 }
             }
         }
+
+        public class EmployeeTestXMLExecuter : IXMLExecuter
+        {
+            private XmlDocument employeeTest;
+
+            private XmlElement test;
+
+            public EmployeeTestXMLExecuter()
+            {
+                employeeTest = new XmlDocument();
+                test = employeeTest.CreateElement("test");
+                employeeTest.AppendChild(test);
+            }
+
+            public override void writeQuestionCollection(QuestionCollection qc, string fileName)
+            {
+                if (qc.Size == 0)
+                    return;
+
+
+            }
+
+            public override void readQuestionCollection(QuestionCollection qc, string fileName)
+            {
+                using (var xml = XmlReader.Create(fileName))
+                {
+                    xml.ReadToFollowing("test");
+
+                    xml.MoveToAttribute("month");
+                    uint month = uint.Parse(xml.Value);
+                    xml.MoveToAttribute("year");
+                    uint year = uint.Parse(xml.Value);
+
+                    qc.transformToTest(month, year);
+
+                    xml.MoveToAttribute("numberOfQuestion");
+                    int n = int.Parse(xml.Value);
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        Question q = new Question();
+                        xml.ReadToFollowing("question");
+
+                        xml.MoveToAttribute("numberOfAnswer");
+                        int m = int.Parse(xml.Value);
+
+                        xml.ReadToFollowing("category");
+                        q.Category = new Category();
+                        q.Category.Title = xml.ReadElementContentAsString();
+
+                        xml.ReadToFollowing("title");
+                        q.Title = xml.ReadElementContentAsString();
+
+                        xml.ReadToFollowing("answer");
+                        for (int j = 0; j < m; j++)
+                        {
+                            xml.ReadToFollowing("option");
+                            MultipleChoiceOption mco = new MultipleChoiceOption(xml.ReadElementContentAsString());
+                            q.AnswerCollection.addAnswer(mco);
+                        }
+
+                        qc.addQuestion(q);
+                    }
+                }
+            }
+
+        }
     }
-
-
 }

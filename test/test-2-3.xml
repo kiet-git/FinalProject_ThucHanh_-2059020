@@ -1,5 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<test id="2-3" month="2" year="3" numberOfQuestion="11">
+<?xml version="1.0" encoding="utf-8"?>
+<test id="2-3" month="2" year="3" numberOfQuestion="12">
+  <question questionNumber="0" numberOfAnswer="2">
+    <category>Phần mềm</category>
+    <title>asdasdasdkjhfakdsfhakjdfhlasdfjhslafhkdflshjdflsahdfksajhdflkshdflhsjkdhflsadhjlfasd</title>
+    <answer>
+      <option>afjskdlfhsajdfhjsldjhflsadhjfklashjdlfksahjdfhkalsdhfkjsdhflashdfjksakldfjhaslfd</option>
+      <option>2</option>
+    </answer>
+  </question>  
   <question questionNumber="0" numberOfAnswer="2">
     <category>Phần mềm</category>
     <title>Cau 5 - 1</title>
