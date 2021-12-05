@@ -6,7 +6,7 @@ namespace ModuleSoanDe
 {
     public partial class FormSoanCauHoi : Form
     {
-        QuestionCollection questionCollection = new QuestionCollection(new NormalXMLExecuter());
+        QuestionCollection questionCollection = new QuestionCollection();
 
         string defaultPath = @"dataQuestion.xml";
 
@@ -16,13 +16,15 @@ namespace ModuleSoanDe
         public FormSoanCauHoi()
         {
             InitializeComponent();
+
+            questionCollection.XMLExecuter = new NormalXMLExecuter();
             questionCollection.readXML(defaultPath);
             questionCollection.setDatasource(listBoxQuestions);
         }
 
         private void btnAddQ_Click(object sender, EventArgs e)
         {
-            questionCollection.addQuestion();
+            questionCollection.addQuestionAndShowFormCauHoi();
             listBoxQuestions.SelectedIndex = -1;
             isSaved = false;
         }
@@ -31,7 +33,7 @@ namespace ModuleSoanDe
         {
             if(selectedIndex > -1)
             {
-                questionCollection.updateQuestion(selectedIndex);
+                questionCollection.updateQuestionAndShowFormCauHoi(selectedIndex);
                 isSaved = false;
             }
         }
@@ -58,7 +60,7 @@ namespace ModuleSoanDe
                 return;
             }
 
-            questionCollection.writeToXML(defaultPath);
+            questionCollection.writeXML(defaultPath);
 
             MessageBox.Show(
                  "Your data is saved successfully",

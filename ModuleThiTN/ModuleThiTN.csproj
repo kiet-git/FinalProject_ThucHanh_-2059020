@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="FormLamBai.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="FormLamBai.cs" />
   </ItemGroup>
 
 </Project>

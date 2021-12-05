@@ -13,8 +13,8 @@ namespace ModuleThiTN
 {
     public partial class FormLamBai : Form
     {
+        EmployeeTest currentTest;
         QuestionCollection testQuestion;
-        Test currentTest;
 
         public delegate void FormLamBai_ExitHandle();
         public event FormLamBai_ExitHandle FormLamBai_Exit;
@@ -24,14 +24,20 @@ namespace ModuleThiTN
         Color green = Color.FromArgb(144, 234, 144);
         Color black = Color.Black;
 
-        public FormLamBai(QuestionCollection qc, Test t)
+        string filePath;
+        const int TIME_FOR_A_QUESTION = 15;
+        bool outOfTime = false;
+
+        public FormLamBai(EmployeeTest t)
         {
             InitializeComponent();
-            testQuestion = qc;
+
             currentTest = t;
+            testQuestion = t.CurrentTest.Collection;
+
             lvwQuestion.Items.Clear();
             
-            foreach(var q in testQuestion.ListOfQuestions)
+            foreach(var q in testQuestion.LstQuestion)
             {
                 ListViewItem lvi = new ListViewItem()
                 {
@@ -43,22 +49,49 @@ namespace ModuleThiTN
                 lvwQuestion.Items.Add(lvi);
             }
 
+            uta = new uscTestAnswer(testQuestion.getQuestion(0));
+            uta.uscTestAnswer_Checked += new uscTestAnswer.uscTestAnswer_CheckedHandler(normalizeColor);
+            uta.Location = new Point(250, 130);
+            uta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            this.Controls.Add(uta);
+
             lvwQuestion.SelectedIndices.Add(0);
             lbQuestion.Text = $"No. {1}: {testQuestion.getQuestion(0).Title}";
 
-            uta = new uscTestAnswer(testQuestion.getQuestion(0));
-            uta.uscTestAnswer_Checked += new uscTestAnswer.uscTestAnswer_CheckedHandler(changeColor);
-            uta.Location = new Point(250, 130);
-            uta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.Controls.Add(uta);
+            int tempTime = TIME_FOR_A_QUESTION * testQuestion.Size; 
+
+            uscClock1._mm = tempTime / 60;
+            uscClock1._ss = tempTime % 60;
+            uscClock1.Start();
+            uscClock1.uscEClock_Exit += new uscClock.uscEClock_ExitHandle(uscClock1_Exit);
+        }
+        private void uscClock1_Exit()
+        {
+            uscClock1.Stop();
+            outOfTime = true;
+
+            MessageBox.Show(
+                  "Your time is up! Please choose a folder to save your test",
+                  "Information!",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Information);
+            openFolderDialogAndSave();
+
+            this.Close();
         }
 
-        private void changeColor()
+        private void normalizeColor()
         {
             if (lvwQuestion.SelectedIndices.Count > 0 && lvwQuestion.SelectedIndices[0] > -1)
             {
-                lvwQuestion.Items[lvwQuestion.SelectedIndices[0]].BackColor = green;
-                lvwQuestion.Items[lvwQuestion.SelectedIndices[0]].ForeColor = black;
+                if (testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]).isChosen())
+                {
+                    lvwQuestion.FocusedItem.BackColor = green;
+                }
+                else
+                {
+                    lvwQuestion.FocusedItem.BackColor = red;
+                }
             }
         }
 
@@ -88,35 +121,22 @@ namespace ModuleThiTN
                 lvwQuestion.FocusedItem.BackColor = Color.Yellow;
             } else
             {
-                if(testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]).isChosen())
-                {
-                    lvwQuestion.FocusedItem.BackColor = green;
-                } else
-                {
-                    lvwQuestion.FocusedItem.BackColor = red;
-                }
+                normalizeColor();
             }
         }
 
         private void lvwQuestion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lvwQuestion.SelectedIndices.Count > 0 && lvwQuestion.SelectedIndices[0] > -1)
+            if (lvwQuestion.SelectedIndices.Count > 0 && lvwQuestion.SelectedIndices[0] > -1)
             {
-               
                 lbQuestion.Text = $"No. {lvwQuestion.SelectedIndices[0] + 1}: {testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]).Title}";
                 uta.setQuestion(testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]));
             }
         }
 
-
         private void FormLamBai_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormLamBai_Exit();
-        }
-
-        private void FormLamBai_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnPrev_Click(object sender, EventArgs e)
@@ -126,6 +146,7 @@ namespace ModuleThiTN
                 int temp = lvwQuestion.SelectedIndices[0] - 1;
                 lvwQuestion.SelectedIndices.Clear();
                 lvwQuestion.SelectedIndices.Add(temp);
+                lvwQuestion.FocusedItem = lvwQuestion.SelectedItems[0];
             }
         }
 
@@ -136,13 +157,71 @@ namespace ModuleThiTN
                 int temp = lvwQuestion.SelectedIndices[0] + 1;
                 lvwQuestion.SelectedIndices.Clear();
                 lvwQuestion.SelectedIndices.Add(temp);
+                lvwQuestion.FocusedItem = lvwQuestion.SelectedItems[0];
             }
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("You Finish!");
             this.Close();
+        }
+
+        private void btnHighlight_Click(object sender, EventArgs e)
+        {
+            lvwQuestion.FocusedItem.BackColor = Color.Yellow;
+        }
+
+        private void btnUnhighlight_Click(object sender, EventArgs e)
+        {
+            normalizeColor();
+        }
+
+        private void openFolderDialogAndSave()
+        {
+            uscClock1.Stop();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult dr = fbd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                filePath = fbd.SelectedPath + $"\\empTest-{currentTest.CurrentEm.Id}-{currentTest.CurrentTest.Id}.xml";
+                saveTest();
+            } else if (dr == DialogResult.Cancel)
+            {
+                MessageBox.Show(
+                  "Please choose a folder to save your test",
+                  "Information!",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Information);
+                openFolderDialogAndSave();
+            }
+        }
+
+        private void FormLamBai_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(outOfTime)
+            {
+                openFolderDialogAndSave();
+            } else
+            {
+                DialogResult dr = MessageBox.Show(
+                  "Are you finished? Your test will be saved in your chosen folder. You cannot make change to the test if you choose yes.",
+                  "Information!",
+                  MessageBoxButtons.YesNo,
+                  MessageBoxIcon.Question);
+
+                if (dr == DialogResult.Yes)
+                {
+                    openFolderDialogAndSave();
+                } else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void saveTest()
+        {
+            currentTest.writeXML(filePath);
         }
     }
 }

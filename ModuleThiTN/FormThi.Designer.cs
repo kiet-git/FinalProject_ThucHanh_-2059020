@@ -46,9 +46,9 @@ namespace ModuleThiTN
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtEmail.Location = new System.Drawing.Point(112, 255);
+            this.txtEmail.Location = new System.Drawing.Point(112, 169);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(676, 35);
+            this.txtEmail.Size = new System.Drawing.Size(713, 35);
             this.txtEmail.TabIndex = 16;
             // 
             // txtName
@@ -56,9 +56,9 @@ namespace ModuleThiTN
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtName.Location = new System.Drawing.Point(112, 191);
+            this.txtName.Location = new System.Drawing.Point(112, 128);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(676, 35);
+            this.txtName.Size = new System.Drawing.Size(713, 35);
             this.txtName.TabIndex = 17;
             // 
             // txtId
@@ -66,16 +66,16 @@ namespace ModuleThiTN
             this.txtId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtId.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtId.Location = new System.Drawing.Point(112, 130);
+            this.txtId.Location = new System.Drawing.Point(112, 87);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(676, 35);
+            this.txtId.Size = new System.Drawing.Size(713, 35);
             this.txtId.TabIndex = 18;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(12, 262);
+            this.label3.Location = new System.Drawing.Point(12, 176);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 25);
             this.label3.TabIndex = 9;
@@ -83,11 +83,12 @@ namespace ModuleThiTN
             // 
             // btnChooseTest
             // 
-            this.btnChooseTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnChooseTest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChooseTest.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnChooseTest.Location = new System.Drawing.Point(12, 64);
+            this.btnChooseTest.Location = new System.Drawing.Point(12, 43);
             this.btnChooseTest.Name = "btnChooseTest";
-            this.btnChooseTest.Size = new System.Drawing.Size(776, 34);
+            this.btnChooseTest.Size = new System.Drawing.Size(813, 34);
             this.btnChooseTest.TabIndex = 13;
             this.btnChooseTest.Text = "Choose test";
             this.btnChooseTest.UseVisualStyleBackColor = true;
@@ -97,7 +98,7 @@ namespace ModuleThiTN
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 198);
+            this.label2.Location = new System.Drawing.Point(12, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 25);
             this.label2.TabIndex = 10;
@@ -105,11 +106,13 @@ namespace ModuleThiTN
             // 
             // btnExit
             // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnExit.Location = new System.Drawing.Point(12, 402);
+            this.btnExit.Location = new System.Drawing.Point(12, 259);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(776, 34);
+            this.btnExit.Size = new System.Drawing.Size(813, 34);
             this.btnExit.TabIndex = 14;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -117,11 +120,12 @@ namespace ModuleThiTN
             // 
             // btnBegin
             // 
-            this.btnBegin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnBegin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBegin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnBegin.Location = new System.Drawing.Point(12, 345);
+            this.btnBegin.Location = new System.Drawing.Point(12, 219);
             this.btnBegin.Name = "btnBegin";
-            this.btnBegin.Size = new System.Drawing.Size(776, 34);
+            this.btnBegin.Size = new System.Drawing.Size(813, 34);
             this.btnBegin.TabIndex = 15;
             this.btnBegin.Text = "Begin Test";
             this.btnBegin.UseVisualStyleBackColor = true;
@@ -131,7 +135,7 @@ namespace ModuleThiTN
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 137);
+            this.label1.Location = new System.Drawing.Point(12, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 25);
             this.label1.TabIndex = 11;
@@ -151,7 +155,7 @@ namespace ModuleThiTN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(837, 303);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtId);
@@ -163,7 +167,7 @@ namespace ModuleThiTN
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbFilePath);
             this.Name = "FormThi";
-            this.Text = "Form1";
+            this.Text = "FormThi";
             this.ResumeLayout(false);
             this.PerformLayout();
 

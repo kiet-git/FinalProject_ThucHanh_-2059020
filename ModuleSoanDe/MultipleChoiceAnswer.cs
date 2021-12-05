@@ -4,67 +4,73 @@ using System.Windows.Forms;
 
 namespace ModuleSoanDe
 {
-    public class MultipleChoiceAnswers
+    public class MultipleChoiceAnswer
     {
-
-        private BindingList<MultipleChoiceOption> _listOfAnswers;
+        private BindingList<Option> _lstOption;
 
         public int Size
         {
             get
             {
-                return _listOfAnswers.Count;
+                return _lstOption.Count;
             }
         }
 
-        public MultipleChoiceAnswers()
+        public MultipleChoiceAnswer()
         {
-            _listOfAnswers = new BindingList<MultipleChoiceOption>();
+            _lstOption = new BindingList<Option>();
         }
 
-        public BindingList<MultipleChoiceOption> ListOfAnswers
+        public BindingList<Option> LstOption
         {
             get
             {
-                return _listOfAnswers;
+                return _lstOption;
             }
         }
 
-        public string getAnswer(int index)
+        public string getOptionAsString(int index)
         {
             if (index >= 0)
-                return _listOfAnswers[index].Answer;
+                return _lstOption[index].OptionName;
             return null;
         }
 
-        public bool addAnswer(MultipleChoiceOption mco)
+        public Option getOption(int index)
         {
-            if (mco.Answer != string.Empty)
+            if (index >= 0)
+                return _lstOption[index];
+            return null;
+        }
+
+        public bool addOption(Option mco)
+        {
+            if (mco.OptionName != string.Empty)
             {
-                _listOfAnswers.Add(mco);
+                _lstOption.Add(mco);
                 return true;
             }
-            _listOfAnswers.ResetBindings();
+            _lstOption.ResetBindings();
             return false;
         }
 
-        public bool updateAnswer(string ans, int index)
+        public bool updateOption(string ans, int index)
         {
-            if (index >= 0 && index < _listOfAnswers.Count && !String.IsNullOrEmpty(ans))
+            if (index >= 0 && index < this.Size && !String.IsNullOrEmpty(ans))
             {
-                _listOfAnswers[index].Answer = ans;
-                _listOfAnswers.ResetBindings();
+                _lstOption[index].OptionName = ans;
+                _lstOption.ResetBindings();
                 return true;
             }
             return false;
         }
 
-        public bool deleteAnswer(int index)
+        public bool deleteOption(int index)
         {
-            if (index >= 0 && index < _listOfAnswers.Count)
+            if (index >= 0 && index < this.Size)
             {
-                _listOfAnswers.RemoveAt(index);
-                _listOfAnswers.ResetBindings();
+                _lstOption.RemoveAt(index);
+                _lstOption.ResetBindings();
                 return true;
             }
             return false;
@@ -72,7 +78,7 @@ namespace ModuleSoanDe
 
         public void setDatasource(ListBox lb)
         {
-            lb.DataSource = _listOfAnswers;
+            lb.DataSource = _lstOption;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ModuleSoanDe
             }
             set
             {
-                if (value != string.Empty && checkPotentialValue(value))
+                if (value != string.Empty && isPotentialValue(value))
                 {
                     _title = value;
                 }
@@ -38,7 +38,7 @@ namespace ModuleSoanDe
             }
         }
 
-        public bool checkPotentialValue(string input)
+        public bool isPotentialValue(string input)
         {
             foreach(var pv in PotentialValue)
             {

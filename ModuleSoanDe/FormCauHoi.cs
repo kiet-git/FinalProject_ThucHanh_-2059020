@@ -11,7 +11,6 @@ namespace ModuleSoanDe
 
         public event FormCauHoi_ExitHandle FormCauHoi_ExitNormal;
 
-        QuestionCollection questionCollection;
         Question question;
         uscMCAInput uscInputAnswer;
 
@@ -28,6 +27,7 @@ namespace ModuleSoanDe
                 q = new Question();
             }
             question = q;
+
             uscInputAnswer = new uscMCAInput(question);
             cmbxCategory.DataSource = question.Category.PotentialValue;
             cmbxCategory.SelectedItem = question.Category.Title;
@@ -54,7 +54,7 @@ namespace ModuleSoanDe
         {
             if (cmbxCategory.SelectedIndex < 0
                || String.IsNullOrEmpty(txtQuestion.Text)
-               || question.AnswerCollection.Size == 0
+               || question.LstAnswerSize == 0
                || question.CorrectIndex < 0)
             {
                 MessageBox.Show(

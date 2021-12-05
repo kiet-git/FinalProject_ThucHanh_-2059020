@@ -6,26 +6,25 @@ namespace ModuleSoanDe
 {
     public class QuestionCollection
     {
-        private BindingList<Question> _listOfQuestions;
+        protected BindingList<Question> _lstQuestions;
 
         public int Size
         {
             get
             {
-                return _listOfQuestions.Count;
+                return _lstQuestions.Count;
             }
         }
 
-        public BindingList<Question> ListOfQuestions
+        public BindingList<Question> LstQuestion
         {
             get
             {
-                return _listOfQuestions;
+                return _lstQuestions;
             }
         }
 
         private IXMLExecuter _XMLExecuter;
-
 
         public IXMLExecuter XMLExecuter
         {
@@ -35,131 +34,57 @@ namespace ModuleSoanDe
             }
         }
 
-        private string _id;
+        private FormCauHoiCreator _fc;
 
-        public string Id
+        public QuestionCollection()
         {
-            get
-            {
-                return _month.ToString() + '-' + _year.ToString();
-            }
-        }
-
-        private uint _month;
-
-        public uint Month
-        {
-            get
-            {
-                return _month;
-            }
-        }
-
-        public uint Year
-        {
-            get
-            {
-                return _year;
-            }
-        }
-
-        private uint _year;
-
-        public QuestionCollection(IXMLExecuter xmle)
-        {
-            _listOfQuestions = new BindingList<Question>();
-            XMLExecuter = xmle;
-        }
-
-        public void transformToTest(uint month, uint year)
-        {
-            if (month < 1 || month > 12 || year < 1)
-            {
-                return;
-            }
-            _month = month;
-            _year = year;
-            _XMLExecuter = new TestXMLExecuter();
-        }
-
-        public void viewQuestion(int index)
-        {
-            if (index > -1 && index < _listOfQuestions.Count)
-            {
-                showFormCauHoi(_listOfQuestions[index], true);
-            }
-        }
-
-        public Question getQuestion(int index)
-        {
-            return ListOfQuestions[index];
-        }
-
-        public void addQuestion()
-        {
-            Question q = new Question();
-            _listOfQuestions.Add(q);
-            showFormCauHoi(q, false);
-        }
-
-        public void addQuestion(Question q)
-        {
-            _listOfQuestions.Add(q);
-        }
-
-        public void updateQuestion(int index)
-        {
-            if (index > -1 && index < _listOfQuestions.Count)
-            {
-                showFormCauHoi(_listOfQuestions[index], false);
-            }
-        }
-
-        public void deleteQuestion(int index)
-        {
-            if (index > -1 && index < _listOfQuestions.Count)
-            {
-                _listOfQuestions.RemoveAt(index);
-                _listOfQuestions.ResetBindings();
-            }
-        }
-
-        public void clearQuestion()
-        {
-            _listOfQuestions.Clear();
-            _listOfQuestions.ResetBindings();
+            _lstQuestions = new BindingList<Question>();
+            _fc = new FormCauHoiCreator(this, false);
         }
 
         public void setDatasource(ListBox lb)
         {
-            lb.DataSource = _listOfQuestions;
+            lb.DataSource = _lstQuestions;
         }
 
-        private void removeEnd()
+        public void resetBinding()
         {
-            _listOfQuestions.RemoveAt(_listOfQuestions.Count - 1);
+            _lstQuestions.ResetBindings();
         }
 
-        private void resetBinding()
+        public Question getQuestion(int index)
         {
-            _listOfQuestions.ResetBindings();
-            MessageBox.Show(this.Size.ToString());
+            return _lstQuestions[index];
         }
 
-        private void showFormCauHoi(Question q, bool isLocked)
+        public void addQuestion(Question q)
         {
-            FormCauHoi fsch = new FormCauHoi(q);
-            fsch.FormCauHoi_ExitWithoutSave += new FormCauHoi.FormCauHoi_ExitHandle(removeEnd);
-            fsch.FormCauHoi_ExitNormal += new FormCauHoi.FormCauHoi_ExitHandle(resetBinding);
-            if (isLocked)
+            _lstQuestions.Add(q);
+            _lstQuestions.ResetBindings();
+        }
+
+        public void clearQuestion()
+        {
+            _lstQuestions.Clear();
+            this.resetBinding();
+        }
+
+        public void removeEnd()
+        {
+            _lstQuestions.RemoveAt(Size - 1);
+            this.resetBinding();
+        }
+
+        public void deleteQuestion(int index)
+        {
+            if (index > -1 && index < Size)
             {
-                fsch.lockForm();
+                _lstQuestions.RemoveAt(index);
+                this.resetBinding();
             }
-            fsch.ShowDialog();
         }
 
-
-        public void writeToXML(string fileName)
+        public void writeXML(string fileName)
         {
             _XMLExecuter.writeQuestionCollection(this, fileName);
         }
@@ -167,13 +92,49 @@ namespace ModuleSoanDe
         public void readXML(string fileName)
         {
             _XMLExecuter.readQuestionCollection(this, fileName);
-            _listOfQuestions.ResetBindings();
+            this.resetBinding();
+        }
+
+        public bool checkEqual(Question q1)
+        {
+            foreach (var q in _lstQuestions)
+            {
+                if (q.checkEqual(q1))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void viewQuestionInFormCauHoi(int index)
+        {
+            if (index > -1 && index < _lstQuestions.Count)
+            {
+                _fc.IsLocked = true;
+                _fc.showFormCauHoi(_lstQuestions[index]);
+            }
+        }
+
+        public void addQuestionAndShowFormCauHoi()
+        {
+            Question q = new Question();
+            _lstQuestions.Add(q);
+            _fc.showFormCauHoi(q);
+        }
+
+        public void updateQuestionAndShowFormCauHoi(int index)
+        {
+            if (index > -1 && index < Size)
+            {
+                _fc.showFormCauHoi(_lstQuestions[index]);
+            }
         }
 
         private BindingList<Question> shallowClone()
         {
             BindingList<Question> resultList = new BindingList<Question>();
-            foreach(var q in _listOfQuestions)
+            foreach (var q in _lstQuestions)
             {
                 resultList.Add(q);
             }
@@ -181,10 +142,10 @@ namespace ModuleSoanDe
             return resultList;
         }
 
-        public QuestionCollection randomizeQuestion(int n)
+        public QuestionCollection randomizeQuestionToTest(int n)
         {
             BindingList<Question> clonedList = this.shallowClone();
-            QuestionCollection randomizedQC = new QuestionCollection(new NormalXMLExecuter());
+            QuestionCollection randomizedQC = new QuestionCollection();
 
             for (int i = 0; i < n; i++)
             {
@@ -195,18 +156,6 @@ namespace ModuleSoanDe
             }
 
             return randomizedQC;
-        }
-
-        public bool checkEqual(Question q1)
-        {
-            foreach(var q in _listOfQuestions)
-            {
-                if(q.checkEqual(q1))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

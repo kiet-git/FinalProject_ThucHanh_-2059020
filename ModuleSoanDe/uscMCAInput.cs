@@ -8,12 +8,6 @@ namespace ModuleSoanDe
         Question question;
         int selectedIndex = -1;
 
-
-        public uscMCAInput()
-        {
-            InitializeComponent();
-        }
-
         public uscMCAInput(Question q)
         {
             InitializeComponent();
@@ -26,7 +20,7 @@ namespace ModuleSoanDe
             {
                 question = q;
                 txtCorrectAnswer.Text = q.getCorrectAnswer();
-                question.AnswerCollection.setDatasource(listBoxAnswers);
+                question.setAnswerDataSource(listBoxAnswers);
             }
         }
 
@@ -45,7 +39,7 @@ namespace ModuleSoanDe
 
             if(selectedIndex > -1)
             {
-                txtAnswer.Text = question.AnswerCollection.getAnswer(selectedIndex);
+                txtAnswer.Text = question.getOptionAsString(selectedIndex);
                 txtAnswer.Select();
             }
         }
@@ -54,7 +48,7 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text))
             {
-                question.AnswerCollection.addAnswer(new MultipleChoiceOption(txtAnswer.Text));
+                question.addOption(new Option(txtAnswer.Text));
                 txtAnswer.Text = String.Empty;
                 listBoxAnswers.SelectedIndex = -1;
                 txtAnswer.Select();
@@ -65,7 +59,7 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.AnswerCollection.updateAnswer(txtAnswer.Text, selectedIndex);
+                question.updateOption(txtAnswer.Text, selectedIndex);
             }
         }
 
@@ -73,7 +67,7 @@ namespace ModuleSoanDe
         {
             if (!String.IsNullOrEmpty(txtAnswer.Text) && selectedIndex >= 0)
             {
-                question.AnswerCollection.deleteAnswer(selectedIndex);
+                question.deleteOption(selectedIndex);
 
                 if(selectedIndex == question.CorrectIndex)
                 {

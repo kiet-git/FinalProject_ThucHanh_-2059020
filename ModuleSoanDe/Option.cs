@@ -1,40 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModuleSoanDe
 {
-    public class MultipleChoiceOption
+    public class Option
     {
-        private string _answer;
-        public string Answer
+        private string _option;
+        public string OptionName
         {
             get
             {
-                return _answer;
+                return _option;
             }
             set
             {
                 if (value != string.Empty)
                 {
-                    _answer = value;
+                    _option = value;
                 }
             }
         }
 
-        public MultipleChoiceOption(string input)
+        public Option(string input)
         {
             if (!String.IsNullOrEmpty(input))
             {
-                _answer = input;
+                _option = input;
             }
+        }
+
+        public bool checkEqual(Option o)
+        {
+            return o.OptionName == this.OptionName;
         }
 
         public override string ToString()
         {
-            return _answer;
+            return _option;
         }
     }
 }

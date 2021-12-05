@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModuleSoanDe;
 
@@ -29,16 +23,16 @@ namespace ModuleThiTN
         {
             question = q;
 
-            panelAnswer.SetAutoScrollMargin(0, 10 * question.AnswerCollection.Size);
+            panelAnswer.SetAutoScrollMargin(0, 10 * question.LstAnswer.Size);
             panelAnswer.Controls.Clear();
 
             int xPos = 13;
             int yPos = 12;
-            for (int i = 0; i < question.AnswerCollection.Size; i++)
+            for (int i = 0; i < question.LstAnswer.Size; i++)
             {
                 RadioButton radio = new RadioButton()
                 {
-                    Text = question.AnswerCollection.getAnswer(i)
+                    Text = question.getOptionAsString(i)
                 };
                 radio.Name = $"{i}";
                 radio.AutoSize = true;
@@ -61,8 +55,8 @@ namespace ModuleThiTN
             RadioButton r = (RadioButton)sender;
             if(r.Checked == true)
             {
-                uscTestAnswer_Checked();
                 question.ChosenIndex = int.Parse(r.Name);
+                uscTestAnswer_Checked();
             }
         }
     }

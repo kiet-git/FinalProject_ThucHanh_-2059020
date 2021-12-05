@@ -9,8 +9,8 @@ namespace ModuleSoanDe
         string defaultInputFile = @"dataQuestion.xml";
         string defaultOutputFile = @"dataTest.xml"; //test-{id}
 
-        QuestionCollection quesColInput = new QuestionCollection(new NormalXMLExecuter());
-        QuestionCollection quesColOutput = new QuestionCollection(new TestXMLExecuter());
+        QuestionCollection quesColInput = new QuestionCollection();
+        QuestionCollection quesColOutput = new QuestionCollection();
 
         bool isSaved = true;
 
@@ -23,8 +23,10 @@ namespace ModuleSoanDe
 
         private void FormTaoDe_Load(object sender, EventArgs e)
         {
+            quesColInput.XMLExecuter = new NormalXMLExecuter();
             quesColInput.readXML(defaultInputFile);
             txtAvailable.Text = quesColInput.Size.ToString();
+
             MessageBox.Show(
                 "Test will be stored int the test file of the solution. Answer for the test will be stored in the answer file of the project. Id of the files is the month and year combination.",
                 "Information!",
@@ -42,7 +44,7 @@ namespace ModuleSoanDe
                 return;
             }
 
-            quesColOutput = quesColInput.randomizeQuestion(noOfQ);
+            quesColOutput = quesColInput.randomizeQuestionToTest(noOfQ);
             quesColOutput.setDatasource(listBoxQOut);
             isSaved = false;
         }
@@ -51,7 +53,7 @@ namespace ModuleSoanDe
         {
             if(listBoxQIn.SelectedIndex > -1)
             {
-                quesColInput.viewQuestion(listBoxQIn.SelectedIndex);
+                quesColInput.viewQuestionInFormCauHoi(listBoxQIn.SelectedIndex);
             }
         }
 
@@ -118,10 +120,8 @@ namespace ModuleSoanDe
             if (isSaved || quesColOutput.Size == 0)
                 return;
 
-            quesColOutput.transformToTest(month, year);
-            defaultOutputFile = quesColOutput.Id + ".xml";
-
-            quesColOutput.writeToXML(defaultOutputFile);
+            Test test = new Test(quesColOutput, month, year);
+            test.writeXML();
 
             MessageBox.Show(
                  "Your data is saved successfully",

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace ModuleSoanDe
 {
@@ -47,7 +48,7 @@ namespace ModuleSoanDe
             }
             set
             {
-                if(value >= 0 && value < AnswerCollection.Size)
+                if(value >= 0 && value < LstAnswer.Size)
                 {
                     _correctIndex = value; 
                 } 
@@ -64,24 +65,28 @@ namespace ModuleSoanDe
             }
             set
             {
-                if (value >= 0 && value < AnswerCollection.Size)
+                if (value >= 0 && value < LstAnswer.Size)
                 {
                     _chosenIndex = value;
                 }
             }
         }
 
-        private MultipleChoiceAnswers _answerCollection;
+        private MultipleChoiceAnswer _lstAnswer;
 
-        public MultipleChoiceAnswers AnswerCollection
+        public MultipleChoiceAnswer LstAnswer
         {
             get
             {
-                return _answerCollection;
+                return _lstAnswer;
             }
-            set
+        }
+
+        public int LstAnswerSize
+        {
+            get
             {
-                _answerCollection = value;
+                return _lstAnswer.Size;
             }
         }
 
@@ -91,18 +96,13 @@ namespace ModuleSoanDe
             _title = "";
             _correctIndex = -1;
             _chosenIndex = -1;
-            AnswerCollection = new MultipleChoiceAnswers();
-        }
-
-        public override string ToString()
-        {
-            return Title;
+            _lstAnswer = new MultipleChoiceAnswer();
         }
 
         public string getCorrectAnswer()
         {
-            if(this.CorrectIndex >= 0)  
-                return this.AnswerCollection.getAnswer(this.CorrectIndex);
+            if(CorrectIndex >= 0)  
+                return _lstAnswer.getOptionAsString(CorrectIndex);
             return "";
         }
 
@@ -112,9 +112,9 @@ namespace ModuleSoanDe
                && q.Title == this.Title
                && q.CorrectIndex == this.CorrectIndex)
             {
-                for(int i = 0; i < AnswerCollection.Size; i++)
+                for(int i = 0; i < _lstAnswer.Size; i++)
                 {
-                    if(AnswerCollection.ListOfAnswers[i].Answer != q.AnswerCollection.ListOfAnswers[i].Answer)
+                    if(!this.LstAnswer.getOption(i).checkEqual(q.LstAnswer.getOption(i)))
                     {
                         return false;
                     }
@@ -127,6 +127,36 @@ namespace ModuleSoanDe
         public bool isChosen()
         {
             return _chosenIndex > -1;
+        }
+
+        public void setAnswerDataSource(ListBox lb)
+        {
+            _lstAnswer.setDatasource(lb);
+        }
+
+        public string getOptionAsString(int index)
+        {
+            return _lstAnswer.getOptionAsString(index);
+        }
+
+        public void addOption(Option o)
+        {
+            _lstAnswer.addOption(o);
+        }
+
+        public void updateOption(string ans, int index)
+        {
+            _lstAnswer.updateOption(ans, index);
+        }
+
+        public void deleteOption(int index)
+        {
+            _lstAnswer.deleteOption(index);
+        }
+
+        public override string ToString()
+        {
+            return _title;
         }
     }
 }
