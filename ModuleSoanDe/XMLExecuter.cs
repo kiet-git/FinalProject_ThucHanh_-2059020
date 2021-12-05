@@ -1,10 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 
 namespace ModuleSoanDe
 {
+    public class NormalTextExecuter 
+    {
+        FormDirectory fd = new FormDirectory();
+
+        public void write(List<EmployeeTest> lstET, string filePath)
+        {
+            filePath = fd.getFolder("resultDir") + filePath;
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                sw.WriteLine($"Result of ITEC test: ");
+                foreach(var em in lstET)
+                {
+                    sw.WriteLine($"Test Id: {em.CurrentTest.Id} " +
+                        $"| Month: {em.CurrentTest.Month} | Year: {em.CurrentTest.Year} " +
+                        $"| EmID: {em.CurrentEm.Id} | EmName: {em.CurrentEm.Name} | EmEmail: {em.CurrentEm.Email} " +
+                        $"| Mark: {em.Mark} out of {em.CurrentTest.Size}");
+                }
+            }
+        }
+    }
+
     public abstract class IXMLExecuter
     {
         protected FormDirectory fd = new FormDirectory();
@@ -129,13 +152,8 @@ namespace ModuleSoanDe
 
         private XmlElement test;
 
-        private XmlDocument docAnswer;
-
-        private XmlElement answer;
-
         private string testDir;
 
-        private string answerDir;
 
         private TestIdentification _td;
 
@@ -147,12 +165,7 @@ namespace ModuleSoanDe
             test = docTest.CreateElement("test");
             docTest.AppendChild(test);
 
-            docAnswer = new XmlDocument();
-            answer = docAnswer.CreateElement("answer");
-            docAnswer.AppendChild(answer);
-
             testDir = fd.getFolder("testDir");
-            answerDir = fd.getFolder("answerDir");
         }
 
         public override void writeQuestionCollection(QuestionCollection qc, string fileName)
@@ -170,28 +183,8 @@ namespace ModuleSoanDe
 
             docTest.Save(XmlWriter.Create(testFileDir, new XmlWriterSettings() { Indent = true }));
 
-            int i = 0;
-            answer.SetAttribute("numberOfQuestion", $"{qc.Size}");
-            foreach (var q in qc.LstQuestion)
-            {
-                XmlElement question = docAnswer.CreateElement("question");
-                question.SetAttribute("questionNumber", $"{i}");
-
-                XmlElement title = docAnswer.CreateElement("title");
-                title.InnerText = q.Title;
-
-                XmlElement correctAnswer = docAnswer.CreateElement("correctAnswer");
-                correctAnswer.InnerText = q.CorrectIndex.ToString();
-
-                question.AppendChild(title);
-                question.AppendChild(correctAnswer);
-                answer.AppendChild(question);
-                i++;
-            }
-
-            string answerFileDir = answerDir + "answer-" + fileName;
-
-            docAnswer.Save(XmlWriter.Create(answerFileDir, new XmlWriterSettings() { Indent = true }));
+            qc.XMLExecuter = new CorrectAnswerXMLExecuter(_td);
+            qc.writeXML(fileName);
         }
 
         public override void readQuestionCollection(QuestionCollection qc, string fileName)
@@ -235,38 +228,6 @@ namespace ModuleSoanDe
                 }
             }
         }
-        //    }
-        //    public class EmployeeTestXMLExecuter : IXMLExecuter
-        //    {
-        //        private EmployeeTestQuestionCollection _emTestQC;
-
-        //        private XmlDocument employeeTest;
-
-        //        private XmlElement test;
-
-        //        public EmployeeTestXMLExecuter(EmployeeTestQuestionCollection qc)
-        //        {
-        //            employeeTest = new XmlDocument();
-        //            test = employeeTest.CreateElement("test");
-        //            employeeTest.AppendChild(test);
-        //            _emTestQC = qc;
-        //        }
-
-        //        public override void writeQuestionCollection(string fileName)
-        //        {
-        //            if (_emTestQC.Size == 0)
-        //                return;
-        //        }
-
-        //        public override void readQuestionCollection(string fileName)
-        //        {
-        //            using (var xml = XmlReader.Create(fileName))
-        //            {
-
-        //            }
-        //        }
-
-        //    }
     }
 
     public class EmployeeTestXMLExecuter : IXMLExecuter
@@ -297,6 +258,7 @@ namespace ModuleSoanDe
             test.SetAttribute("id", $"{_td.Id}");
             test.SetAttribute("month", $"{_td.Month}");
             test.SetAttribute("year", $"{_td.Year}");
+            test.SetAttribute("numberOfQuestion", $"{qc.Size}");
 
             XmlElement employee = docEmTest.CreateElement("employee");
             employee.SetAttribute("emId", _em.Id);
@@ -310,12 +272,16 @@ namespace ModuleSoanDe
                 XmlElement question = docEmTest.CreateElement("question");
                 question.SetAttribute("questionNumber", $"{i}");
 
+                XmlElement category = docEmTest.CreateElement("category");
+                category.InnerText = q.Category.Title;
+
                 XmlElement title = docEmTest.CreateElement("title");
                 title.InnerText = q.Title;
 
                 XmlElement chosenAnswer = docEmTest.CreateElement("chosenAnswer");
                 chosenAnswer.InnerText = q.ChosenIndex.ToString();
 
+                question.AppendChild(category);
                 question.AppendChild(title);
                 question.AppendChild(chosenAnswer);
                 test.AppendChild(question);
@@ -327,8 +293,133 @@ namespace ModuleSoanDe
 
         public override void readQuestionCollection(QuestionCollection qc, string filePath)
         {
+            using (var xml = XmlReader.Create(filePath))
+            {
+                xml.ReadToFollowing("test");
 
+                xml.MoveToAttribute("numberOfQuestion");
+                int n = int.Parse(xml.Value);
+
+                xml.MoveToAttribute("month");
+                _td.Month = uint.Parse(xml.Value);
+                xml.MoveToAttribute("year");
+                _td.Year = uint.Parse(xml.Value);
+
+                xml.ReadToFollowing("employee");
+                xml.MoveToAttribute("emId");
+                _em.Id = xml.Value;
+                xml.MoveToAttribute("emName");
+                _em.Name = xml.Value;
+                xml.MoveToAttribute("emEmail");
+                _em.Email = xml.Value;
+
+
+                for (int i = 0; i < n; i++)
+                {
+                    Question q = new Question();
+                    xml.ReadToFollowing("question");
+ 
+                    xml.ReadToFollowing("category");
+                    q.Category = new Category();
+                    q.Category.Title = xml.ReadElementContentAsString();
+
+                    xml.ReadToFollowing("title");
+                    q.Title = xml.ReadElementContentAsString();
+
+                    xml.ReadToFollowing("chosenAnswer");
+                    q.ChosenIndex = xml.ReadElementContentAsInt();
+
+                    qc.addQuestion(q);
+                }
+            }
         }
 
+    }
+
+    public class CorrectAnswerXMLExecuter : IXMLExecuter
+    {
+        private XmlDocument docAnswer;
+
+        private XmlElement answer;
+
+        private TestIdentification _td;
+
+        private string answerDir;
+
+        public CorrectAnswerXMLExecuter(TestIdentification td)
+        {
+            _td = td;
+
+            docAnswer = new XmlDocument();
+            answer = docAnswer.CreateElement("answer");
+            docAnswer.AppendChild(answer);
+
+            answerDir = fd.getFolder("answerDir");
+        }
+
+        public override void writeQuestionCollection(QuestionCollection qc, string fileName)
+        {
+            int i = 0;
+            answer.SetAttribute("id", $"{_td.Id}");
+            answer.SetAttribute("month", $"{_td.Month}");
+            answer.SetAttribute("year", $"{_td.Year}");
+            answer.SetAttribute("numberOfQuestion", $"{qc.Size}");
+            foreach (var q in qc.LstQuestion)
+            {
+                XmlElement question = docAnswer.CreateElement("question");
+                question.SetAttribute("questionNumber", $"{i}");
+
+                XmlElement category = docAnswer.CreateElement("category");
+                category.InnerText = q.Category.Title;
+
+                XmlElement title = docAnswer.CreateElement("title");
+                title.InnerText = q.Title;
+
+                XmlElement correctAnswer = docAnswer.CreateElement("correctAnswer");
+                correctAnswer.InnerText = q.CorrectIndex.ToString();
+
+                question.AppendChild(category);
+                question.AppendChild(title);
+                question.AppendChild(correctAnswer);
+                answer.AppendChild(question);
+                i++;
+            }
+
+            string answerFileDir = answerDir + "answer-" + fileName;
+
+            docAnswer.Save(XmlWriter.Create(answerFileDir, new XmlWriterSettings() { Indent = true }));
+        }
+        public override void readQuestionCollection(QuestionCollection qc, string filePath)
+        {
+            using (var xml = XmlReader.Create(filePath))
+            {
+                xml.ReadToFollowing("answer");
+                xml.MoveToAttribute("month");
+                _td.Month = uint.Parse(xml.Value);
+                xml.MoveToAttribute("year");
+                _td.Year = uint.Parse(xml.Value);
+
+                xml.MoveToAttribute("numberOfQuestion");
+                int n = int.Parse(xml.Value);
+
+                for (int i = 0; i < n; i++)
+                {
+                    Question q = new Question();
+                    xml.ReadToFollowing("question");
+
+                    xml.ReadToFollowing("category");
+                    q.Category = new Category();
+                    q.Category.Title = xml.ReadElementContentAsString();
+
+                    xml.ReadToFollowing("title");
+                    q.Title = xml.ReadElementContentAsString();
+
+                    xml.ReadToFollowing("correctAnswer");
+                    q.CorrectIndex = xml.ReadElementContentAsInt();
+
+                    qc.addQuestion(q);
+                }
+            }
+        }
     }
 }

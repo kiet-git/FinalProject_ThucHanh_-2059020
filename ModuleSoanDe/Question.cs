@@ -48,7 +48,7 @@ namespace ModuleSoanDe
             }
             set
             {
-                if(value >= 0 && value < LstAnswer.Size)
+                if(value >= 0)
                 {
                     _correctIndex = value; 
                 } 
@@ -65,7 +65,7 @@ namespace ModuleSoanDe
             }
             set
             {
-                if (value >= 0 && value < LstAnswer.Size)
+                if (value >= 0)
                 {
                     _chosenIndex = value;
                 }
@@ -122,6 +122,11 @@ namespace ModuleSoanDe
                 return true;
             }
             return false;
+        }
+
+        public bool isCorrect(int index)
+        {
+            return index == _correctIndex;
         }
 
         public bool isChosen()

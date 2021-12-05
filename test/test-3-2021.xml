@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<test id="3-2021" month="3" year="2021" numberOfQuestion="9">
-  <question questionNumber="0" numberOfAnswer="5">
-    <category>Mạng</category>
-    <title>Cau 8 - 4</title>
+<test id="3-2021" month="3" year="2021" numberOfQuestion="11">
+  <question questionNumber="0" numberOfAnswer="4">
+    <category>Phần mềm</category>
+    <title>Cau 2 - 2</title>
     <answer>
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
-      <option>5</option>
     </answer>
   </question>
   <question questionNumber="1" numberOfAnswer="4">
@@ -21,14 +20,15 @@
       <option>4</option>
     </answer>
   </question>
-  <question questionNumber="2" numberOfAnswer="4">
-    <category>Phần mềm</category>
-    <title>Cau 6 - 2</title>
+  <question questionNumber="2" numberOfAnswer="5">
+    <category>Mạng</category>
+    <title>Cau 8 - 4</title>
     <answer>
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
+      <option>5</option>
     </answer>
   </question>
   <question questionNumber="3" numberOfAnswer="5">
@@ -68,13 +68,14 @@
       <option>2</option>
     </answer>
   </question>
-  <question questionNumber="6" numberOfAnswer="3">
+  <question questionNumber="6" numberOfAnswer="4">
     <category>Phần mềm</category>
-    <title>Cau 3 - 3</title>
+    <title>Cau 6 - 2</title>
     <answer>
       <option>1</option>
       <option>2</option>
       <option>3</option>
+      <option>4</option>
     </answer>
   </question>
   <question questionNumber="7" numberOfAnswer="1">
@@ -84,7 +85,17 @@
       <option>1</option>
     </answer>
   </question>
-  <question questionNumber="8" numberOfAnswer="10">
+  <question questionNumber="8" numberOfAnswer="4">
+    <category>Phần mềm</category>
+    <title>Cau 11 - 3</title>
+    <answer>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </answer>
+  </question>
+  <question questionNumber="9" numberOfAnswer="10">
     <category>Phần mềm</category>
     <title>Cau 4 - 4</title>
     <answer>
@@ -98,6 +109,15 @@
       <option>8</option>
       <option>9</option>
       <option>10</option>
+    </answer>
+  </question>
+  <question questionNumber="10" numberOfAnswer="3">
+    <category>Phần mềm</category>
+    <title>Cau 3 - 3</title>
+    <answer>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
     </answer>
   </question>
 </test>

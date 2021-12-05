@@ -38,7 +38,7 @@ namespace ModuleThiTN
                 return;
             }
 
-            string[] checkPath = filePath.Split("-");
+            string[] checkPath = filePath.Split("\\")[filePath.Split("\\").Length - 1].Split("-");
             if(checkPath[0] != "test" || checkPath.Length != 3)
             {
                 MessageBox.Show("Test file is inappropriate! Please choose the file containing the test",

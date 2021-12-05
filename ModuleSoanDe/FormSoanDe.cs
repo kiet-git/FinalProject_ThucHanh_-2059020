@@ -22,5 +22,16 @@ namespace ModuleSoanDe
             FormTaoDe ftd = new FormTaoDe();
             ftd.ShowDialog();
         }
+
+        private void btnMark_Click(object sender, EventArgs e)
+        {
+            FormChamBai fcb = new FormChamBai();
+            fcb.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

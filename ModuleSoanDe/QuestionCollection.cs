@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ModuleSoanDe
@@ -105,6 +106,23 @@ namespace ModuleSoanDe
                 }
             }
             return false;
+        }
+
+        public int markTest(QuestionCollection qc)
+        {
+            int mark = 0;
+            for(int i = 0; i < Size; i++)
+            {
+                Question a = LstQuestion[i];
+                Question b = qc.LstQuestion[i];
+                if (a.Title == b.Title 
+                    && a.Category.Title == b.Category.Title 
+                    && a.isCorrect(b.ChosenIndex)) 
+                {
+                    mark++;
+                }
+            }
+            return mark;
         }
 
         public void viewQuestionInFormCauHoi(int index)

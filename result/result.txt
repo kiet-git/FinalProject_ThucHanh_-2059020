@@ -1,0 +1,3 @@
+Result of ITEC test: 
+Test id: 3-2021 | Month: 3 | Year: 2021 | EmID: 123456789 | EmName: Kiet | EmEmail: kietntt@gmail.com | Mark: 11 out of 11
+Test id: 4-2020 | Month: 4 | Year: 2020 | EmID: 987654321 | EmName: tiek | EmEmail: tiek@gmail.com | Mark: 2 out of 5

@@ -78,10 +78,21 @@ namespace ModuleSoanDe
             _qc.readXML(fileName);
         }
 
+        public void readEmXML(Employee e, string fileName)
+        {
+            _qc.XMLExecuter = new EmployeeTestXMLExecuter(_td, e);
+            _qc.readXML(fileName);
+        }
+
         public void writeEmXML(Employee e, string fileName)
         {
             _qc.XMLExecuter = new EmployeeTestXMLExecuter(_td, e);
             _qc.writeXML(fileName);
+        }
+        public void readCorrectXML(string fileName)
+        {
+            _qc.XMLExecuter = new CorrectAnswerXMLExecuter(_td);
+            _qc.readXML(fileName);
         }
     }
 
