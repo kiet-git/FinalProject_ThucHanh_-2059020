@@ -130,9 +130,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(25, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(622, 30);
+            this.label1.Size = new System.Drawing.Size(453, 30);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Question bank path: \\ModuleSoanDe\\bank\\dataQuestion.xml";
+            this.label1.Text = "Question bank path: bank\\dataQuestion.xml";
             // 
             // FormSoanCauHoi
             // 

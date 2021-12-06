@@ -54,11 +54,11 @@ namespace ModuleSoanDe
             // 
             this.lbFilePath.AutoSize = true;
             this.lbFilePath.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbFilePath.Location = new System.Drawing.Point(146, 36);
+            this.lbFilePath.Location = new System.Drawing.Point(314, 38);
             this.lbFilePath.Name = "lbFilePath";
-            this.lbFilePath.Size = new System.Drawing.Size(484, 25);
+            this.lbFilePath.Size = new System.Drawing.Size(187, 25);
             this.lbFilePath.TabIndex = 16;
-            this.lbFilePath.Text = "Result path: \\FinalProject_ThucHanh_2059020\\result\\";
+            this.lbFilePath.Text = "Result path: \\result\\";
             // 
             // btnExit
             // 
