@@ -3,7 +3,7 @@
 ## Thông tin cá nhân
 
 - Student Id: 2059020
-- Name: Nguyễn Trần Tuấn 
+- Name: Nguyễn Trần Tuấn Kiệt
 - Class: 20BIT1
 - Email: 2059020@itec.hcmus.edu.vn
 
