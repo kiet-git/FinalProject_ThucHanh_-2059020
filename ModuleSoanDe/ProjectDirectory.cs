@@ -4,13 +4,12 @@ using System.Collections.Generic;
 
 namespace ModuleSoanDe
 {
-
-    public class FormDirectory
+    public class ProjectDirectory
     {
         private string dir = Environment.CurrentDirectory;
         private Dictionary<string, string> _folderDir = new Dictionary<string, string>();
 
-        public FormDirectory()
+        public ProjectDirectory()
         {
             _folderDir.Add("bankDir", getProjDirectory() + @"\bank\");
             _folderDir.Add("answerDir", getProjDirectory() + @"\answer\");

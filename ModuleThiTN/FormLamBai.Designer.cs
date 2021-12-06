@@ -91,7 +91,8 @@ namespace ModuleThiTN
             this.btnNext.Location = new System.Drawing.Point(438, 450);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(169, 34);
-            this.btnNext.TabIndex = 5;
+            this.btnNext.TabIndex = 4;
+            this.btnNext.TabStop = false;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -103,7 +104,7 @@ namespace ModuleThiTN
             this.btnPrev.Location = new System.Drawing.Point(263, 450);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(169, 34);
-            this.btnPrev.TabIndex = 5;
+            this.btnPrev.TabIndex = 3;
             this.btnPrev.Text = "Previous";
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
@@ -115,7 +116,7 @@ namespace ModuleThiTN
             this.btnHighlight.Location = new System.Drawing.Point(12, 450);
             this.btnHighlight.Name = "btnHighlight";
             this.btnHighlight.Size = new System.Drawing.Size(110, 34);
-            this.btnHighlight.TabIndex = 5;
+            this.btnHighlight.TabIndex = 1;
             this.btnHighlight.Text = "Highlight";
             this.btnHighlight.UseVisualStyleBackColor = true;
             this.btnHighlight.Click += new System.EventHandler(this.btnHighlight_Click);
@@ -128,7 +129,7 @@ namespace ModuleThiTN
             this.btnUnhighlight.Location = new System.Drawing.Point(128, 450);
             this.btnUnhighlight.Name = "btnUnhighlight";
             this.btnUnhighlight.Size = new System.Drawing.Size(116, 34);
-            this.btnUnhighlight.TabIndex = 5;
+            this.btnUnhighlight.TabIndex = 2;
             this.btnUnhighlight.Text = "Unhighlight";
             this.btnUnhighlight.UseVisualStyleBackColor = true;
             this.btnUnhighlight.Click += new System.EventHandler(this.btnUnhighlight_Click);

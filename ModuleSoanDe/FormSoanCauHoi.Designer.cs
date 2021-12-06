@@ -45,7 +45,7 @@
             this.btnDeleteQ.Location = new System.Drawing.Point(581, 78);
             this.btnDeleteQ.Name = "btnDeleteQ";
             this.btnDeleteQ.Size = new System.Drawing.Size(177, 34);
-            this.btnDeleteQ.TabIndex = 20;
+            this.btnDeleteQ.TabIndex = 3;
             this.btnDeleteQ.Text = "Delete Question";
             this.btnDeleteQ.UseVisualStyleBackColor = true;
             this.btnDeleteQ.Click += new System.EventHandler(this.btnDeleteQ_Click);
@@ -57,7 +57,7 @@
             this.btnUpdateQ.Location = new System.Drawing.Point(396, 78);
             this.btnUpdateQ.Name = "btnUpdateQ";
             this.btnUpdateQ.Size = new System.Drawing.Size(179, 34);
-            this.btnUpdateQ.TabIndex = 19;
+            this.btnUpdateQ.TabIndex = 2;
             this.btnUpdateQ.Text = "Update Question";
             this.btnUpdateQ.UseVisualStyleBackColor = true;
             this.btnUpdateQ.Click += new System.EventHandler(this.btnUpdateQ_Click);
@@ -69,7 +69,7 @@
             this.btnAddQ.Location = new System.Drawing.Point(217, 78);
             this.btnAddQ.Name = "btnAddQ";
             this.btnAddQ.Size = new System.Drawing.Size(173, 34);
-            this.btnAddQ.TabIndex = 18;
+            this.btnAddQ.TabIndex = 1;
             this.btnAddQ.Text = "Add Question";
             this.btnAddQ.UseVisualStyleBackColor = true;
             this.btnAddQ.Click += new System.EventHandler(this.btnAddQ_Click);
@@ -107,7 +107,7 @@
             this.btnExit.Location = new System.Drawing.Point(408, 348);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(362, 34);
-            this.btnExit.TabIndex = 21;
+            this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -119,7 +119,7 @@
             this.btnSave.Location = new System.Drawing.Point(24, 348);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(378, 34);
-            this.btnSave.TabIndex = 21;
+            this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save to file";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);

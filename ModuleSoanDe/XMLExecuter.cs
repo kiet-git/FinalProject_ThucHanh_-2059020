@@ -6,7 +6,7 @@ namespace ModuleSoanDe
 {
     public class NormalTextExecuter 
     {
-        FormDirectory fd = new FormDirectory();
+        ProjectDirectory fd = new ProjectDirectory();
 
         public void write(List<EmTestQCollection> lstET, string filePath)
         {
@@ -27,7 +27,7 @@ namespace ModuleSoanDe
 
     public abstract class IXMLExecuter
     {
-        protected FormDirectory fd = new FormDirectory();
+        protected ProjectDirectory fd = new ProjectDirectory();
 
         private protected XMLRootHandler xmlRootHandler;
 

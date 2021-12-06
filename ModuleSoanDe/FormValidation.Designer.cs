@@ -44,10 +44,10 @@ namespace ModuleSoanDe
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnExit.Location = new System.Drawing.Point(263, 190);
+            this.btnExit.Location = new System.Drawing.Point(263, 165);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(277, 34);
-            this.btnExit.TabIndex = 7;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -56,13 +56,14 @@ namespace ModuleSoanDe
             // 
             this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnLogin.Location = new System.Drawing.Point(12, 190);
+            this.btnLogin.Location = new System.Drawing.Point(12, 165);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(245, 34);
-            this.btnLogin.TabIndex = 8;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnLogin.KeyUp += new System.Windows.Forms.KeyEventHandler(this.checkEnter_KeyUp);
             // 
             // txtQuestion
             // 
@@ -89,16 +90,17 @@ namespace ModuleSoanDe
             this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtUsername.Location = new System.Drawing.Point(122, 85);
+            this.txtUsername.Location = new System.Drawing.Point(122, 53);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(418, 39);
-            this.txtUsername.TabIndex = 10;
+            this.txtUsername.TabIndex = 1;
+            this.txtUsername.KeyUp += new System.Windows.Forms.KeyEventHandler(this.checkEnter_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(15, 87);
+            this.label1.Location = new System.Drawing.Point(15, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 30);
             this.label1.TabIndex = 9;
@@ -108,7 +110,7 @@ namespace ModuleSoanDe
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(15, 142);
+            this.label2.Location = new System.Drawing.Point(15, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 30);
             this.label2.TabIndex = 9;
@@ -119,17 +121,18 @@ namespace ModuleSoanDe
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPassword.Location = new System.Drawing.Point(122, 140);
+            this.txtPassword.Location = new System.Drawing.Point(122, 108);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(418, 39);
-            this.txtPassword.TabIndex = 10;
+            this.txtPassword.TabIndex = 2;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.checkEnter_KeyUp);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(15, 30);
+            this.label3.Location = new System.Drawing.Point(15, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(294, 30);
             this.label3.TabIndex = 9;
@@ -139,7 +142,7 @@ namespace ModuleSoanDe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 236);
+            this.ClientSize = new System.Drawing.Size(552, 211);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsername);

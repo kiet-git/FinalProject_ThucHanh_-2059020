@@ -45,8 +45,9 @@ namespace ModuleSoanDe
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.btnMakeCorrect);
             this.groupBox1.Controls.Add(this.btnDeleteA);
@@ -60,54 +61,54 @@ namespace ModuleSoanDe
             this.groupBox1.Controls.Add(this.lbAnswer);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(769, 369);
+            this.groupBox1.Size = new System.Drawing.Size(764, 369);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // btnMakeCorrect
             // 
-            this.btnMakeCorrect.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnMakeCorrect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMakeCorrect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMakeCorrect.Location = new System.Drawing.Point(578, 99);
+            this.btnMakeCorrect.Location = new System.Drawing.Point(584, 87);
             this.btnMakeCorrect.Name = "btnMakeCorrect";
-            this.btnMakeCorrect.Size = new System.Drawing.Size(177, 34);
-            this.btnMakeCorrect.TabIndex = 15;
+            this.btnMakeCorrect.Size = new System.Drawing.Size(166, 34);
+            this.btnMakeCorrect.TabIndex = 6;
             this.btnMakeCorrect.Text = "Make Correct";
             this.btnMakeCorrect.UseVisualStyleBackColor = true;
             this.btnMakeCorrect.Click += new System.EventHandler(this.btnMakeCorrect_Click);
             // 
             // btnDeleteA
             // 
-            this.btnDeleteA.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnDeleteA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDeleteA.Location = new System.Drawing.Point(578, 149);
+            this.btnDeleteA.Location = new System.Drawing.Point(584, 141);
             this.btnDeleteA.Name = "btnDeleteA";
-            this.btnDeleteA.Size = new System.Drawing.Size(177, 34);
-            this.btnDeleteA.TabIndex = 15;
+            this.btnDeleteA.Size = new System.Drawing.Size(166, 34);
+            this.btnDeleteA.TabIndex = 5;
             this.btnDeleteA.Text = "Delete Answer";
             this.btnDeleteA.UseVisualStyleBackColor = true;
             this.btnDeleteA.Click += new System.EventHandler(this.btnDeleteA_Click);
             // 
             // btnUpdateA
             // 
-            this.btnUpdateA.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnUpdateA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUpdateA.Location = new System.Drawing.Point(373, 149);
+            this.btnUpdateA.Location = new System.Drawing.Point(383, 141);
             this.btnUpdateA.Name = "btnUpdateA";
             this.btnUpdateA.Size = new System.Drawing.Size(183, 34);
-            this.btnUpdateA.TabIndex = 14;
+            this.btnUpdateA.TabIndex = 4;
             this.btnUpdateA.Text = "Update Answer";
             this.btnUpdateA.UseVisualStyleBackColor = true;
             this.btnUpdateA.Click += new System.EventHandler(this.btnUpdateA_Click);
             // 
             // btnAddA
             // 
-            this.btnAddA.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnAddA.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddA.Location = new System.Drawing.Point(175, 149);
+            this.btnAddA.Location = new System.Drawing.Point(178, 141);
             this.btnAddA.Name = "btnAddA";
             this.btnAddA.Size = new System.Drawing.Size(179, 34);
-            this.btnAddA.TabIndex = 13;
+            this.btnAddA.TabIndex = 3;
             this.btnAddA.Text = "Add Answer";
             this.btnAddA.UseVisualStyleBackColor = true;
             this.btnAddA.Click += new System.EventHandler(this.btnAddA_Click);
@@ -124,36 +125,34 @@ namespace ModuleSoanDe
             this.listBoxAnswers.Location = new System.Drawing.Point(11, 200);
             this.listBoxAnswers.Name = "listBoxAnswers";
             this.listBoxAnswers.ScrollAlwaysVisible = true;
-            this.listBoxAnswers.Size = new System.Drawing.Size(744, 154);
+            this.listBoxAnswers.Size = new System.Drawing.Size(739, 154);
             this.listBoxAnswers.TabIndex = 12;
             this.listBoxAnswers.SelectedIndexChanged += new System.EventHandler(this.listBoxAnswers_SelectedIndexChanged);
             // 
             // txtCorrectAnswer
             // 
-            this.txtCorrectAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCorrectAnswer.Enabled = false;
             this.txtCorrectAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCorrectAnswer.Location = new System.Drawing.Point(175, 94);
+            this.txtCorrectAnswer.Location = new System.Drawing.Point(175, 82);
             this.txtCorrectAnswer.Name = "txtCorrectAnswer";
-            this.txtCorrectAnswer.Size = new System.Drawing.Size(381, 39);
-            this.txtCorrectAnswer.TabIndex = 11;
+            this.txtCorrectAnswer.Size = new System.Drawing.Size(391, 39);
+            this.txtCorrectAnswer.TabIndex = 2;
             // 
             // txtAnswer
             // 
             this.txtAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAnswer.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtAnswer.Location = new System.Drawing.Point(175, 32);
+            this.txtAnswer.Location = new System.Drawing.Point(175, 22);
             this.txtAnswer.Name = "txtAnswer";
-            this.txtAnswer.Size = new System.Drawing.Size(580, 39);
-            this.txtAnswer.TabIndex = 11;
+            this.txtAnswer.Size = new System.Drawing.Size(575, 39);
+            this.txtAnswer.TabIndex = 1;
             // 
             // lbListOfA
             // 
             this.lbListOfA.AutoSize = true;
             this.lbListOfA.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbListOfA.Location = new System.Drawing.Point(11, 149);
+            this.lbListOfA.Location = new System.Drawing.Point(8, 141);
             this.lbListOfA.Name = "lbListOfA";
             this.lbListOfA.Size = new System.Drawing.Size(158, 30);
             this.lbListOfA.TabIndex = 9;
@@ -163,7 +162,7 @@ namespace ModuleSoanDe
             // 
             this.lbCorrectIndex.AutoSize = true;
             this.lbCorrectIndex.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbCorrectIndex.Location = new System.Drawing.Point(6, 99);
+            this.lbCorrectIndex.Location = new System.Drawing.Point(11, 87);
             this.lbCorrectIndex.Name = "lbCorrectIndex";
             this.lbCorrectIndex.Size = new System.Drawing.Size(163, 30);
             this.lbCorrectIndex.TabIndex = 10;
@@ -173,7 +172,7 @@ namespace ModuleSoanDe
             // 
             this.lbAnswer.AutoSize = true;
             this.lbAnswer.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbAnswer.Location = new System.Drawing.Point(83, 37);
+            this.lbAnswer.Location = new System.Drawing.Point(83, 27);
             this.lbAnswer.Name = "lbAnswer";
             this.lbAnswer.Size = new System.Drawing.Size(86, 30);
             this.lbAnswer.TabIndex = 10;
@@ -185,7 +184,7 @@ namespace ModuleSoanDe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "uscMCAInput";
-            this.Size = new System.Drawing.Size(775, 389);
+            this.Size = new System.Drawing.Size(774, 389);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

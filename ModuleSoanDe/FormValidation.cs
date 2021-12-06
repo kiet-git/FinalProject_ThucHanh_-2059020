@@ -19,7 +19,12 @@ namespace ModuleSoanDe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if(!checkCredential())
+            validateUser();
+        }
+
+        private void validateUser()
+        {
+            if (!checkCredential())
             {
                 MessageBox.Show("Wrong credential! Please check again!",
                     "Warning!",
@@ -41,7 +46,7 @@ namespace ModuleSoanDe
 
         private void loadJSON()
         {
-            FormDirectory fd = new FormDirectory();
+            ProjectDirectory fd = new ProjectDirectory();
             string content = File.ReadAllText(fd.getFolder("credentialDir") + FILE_NAME);
             lstUsers = JsonSerializer.Deserialize<List<User>>(content);
         }
@@ -57,6 +62,14 @@ namespace ModuleSoanDe
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkEnter_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                validateUser();
+            }
         }
     }
 

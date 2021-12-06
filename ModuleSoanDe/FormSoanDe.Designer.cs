@@ -40,7 +40,7 @@
             this.btnCreateQuestion.Location = new System.Drawing.Point(12, 12);
             this.btnCreateQuestion.Name = "btnCreateQuestion";
             this.btnCreateQuestion.Size = new System.Drawing.Size(539, 83);
-            this.btnCreateQuestion.TabIndex = 0;
+            this.btnCreateQuestion.TabIndex = 1;
             this.btnCreateQuestion.Text = "Create Question";
             this.btnCreateQuestion.UseVisualStyleBackColor = true;
             this.btnCreateQuestion.Click += new System.EventHandler(this.btnCreate_Click);
@@ -51,7 +51,7 @@
             this.btnCreateTest.Location = new System.Drawing.Point(12, 101);
             this.btnCreateTest.Name = "btnCreateTest";
             this.btnCreateTest.Size = new System.Drawing.Size(539, 83);
-            this.btnCreateTest.TabIndex = 0;
+            this.btnCreateTest.TabIndex = 2;
             this.btnCreateTest.Text = "Create Test";
             this.btnCreateTest.UseVisualStyleBackColor = true;
             this.btnCreateTest.Click += new System.EventHandler(this.btnCreateTest_Click);
@@ -62,7 +62,7 @@
             this.btnMark.Location = new System.Drawing.Point(12, 190);
             this.btnMark.Name = "btnMark";
             this.btnMark.Size = new System.Drawing.Size(539, 83);
-            this.btnMark.TabIndex = 0;
+            this.btnMark.TabIndex = 3;
             this.btnMark.Text = "Mark Test";
             this.btnMark.UseVisualStyleBackColor = true;
             this.btnMark.Click += new System.EventHandler(this.btnMark_Click);
@@ -73,7 +73,7 @@
             this.btnExit.Location = new System.Drawing.Point(12, 279);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(539, 83);
-            this.btnExit.TabIndex = 0;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);

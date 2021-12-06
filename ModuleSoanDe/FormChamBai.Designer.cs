@@ -45,7 +45,7 @@ namespace ModuleSoanDe
             this.btnChooseFolder.Location = new System.Drawing.Point(12, 315);
             this.btnChooseFolder.Name = "btnChooseFolder";
             this.btnChooseFolder.Size = new System.Drawing.Size(766, 36);
-            this.btnChooseFolder.TabIndex = 15;
+            this.btnChooseFolder.TabIndex = 2;
             this.btnChooseFolder.Text = "Choose folder to mark";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
             this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
@@ -69,7 +69,7 @@ namespace ModuleSoanDe
             this.btnExit.Location = new System.Drawing.Point(12, 357);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(766, 34);
-            this.btnExit.TabIndex = 17;
+            this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -82,7 +82,7 @@ namespace ModuleSoanDe
             this.txtFileName.Location = new System.Drawing.Point(125, 176);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.Size = new System.Drawing.Size(653, 39);
-            this.txtFileName.TabIndex = 19;
+            this.txtFileName.TabIndex = 1;
             this.txtFileName.Text = "result2.0";
             // 
             // lbQuestion

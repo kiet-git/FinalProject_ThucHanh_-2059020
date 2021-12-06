@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+    uscClock's source: Nguyen Duc Huy
+ */
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using ModuleSoanDe;

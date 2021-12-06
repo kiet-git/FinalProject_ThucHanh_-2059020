@@ -64,7 +64,7 @@
             this.txtQuestion.Location = new System.Drawing.Point(194, 78);
             this.txtQuestion.Name = "txtQuestion";
             this.txtQuestion.Size = new System.Drawing.Size(573, 39);
-            this.txtQuestion.TabIndex = 1;
+            this.txtQuestion.TabIndex = 2;
             // 
             // cmbxCategory
             // 
@@ -75,7 +75,7 @@
             this.cmbxCategory.Location = new System.Drawing.Point(194, 24);
             this.cmbxCategory.Name = "cmbxCategory";
             this.cmbxCategory.Size = new System.Drawing.Size(573, 40);
-            this.cmbxCategory.TabIndex = 2;
+            this.cmbxCategory.TabIndex = 1;
             // 
             // btnSave
             // 
@@ -84,7 +84,7 @@
             this.btnSave.Location = new System.Drawing.Point(9, 510);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(375, 34);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save/Update All";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);

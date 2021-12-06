@@ -99,29 +99,16 @@ namespace ModuleSoanDe
             _lstAnswer = new MultipleChoiceAnswer();
         }
 
+        public void setAnswerDataSource(ListBox lb)
+        {
+            _lstAnswer.setDatasource(lb);
+        }
+
         public string getCorrectAnswer()
         {
             if(CorrectIndex >= 0)  
                 return _lstAnswer.getOptionAsString(CorrectIndex);
             return "";
-        }
-
-        public bool checkEqual(Question q)
-        {
-            if(q.Category.Title == this.Category.Title 
-               && q.Title == this.Title
-               && q.CorrectIndex == this.CorrectIndex)
-            {
-                for(int i = 0; i < _lstAnswer.Size; i++)
-                {
-                    if(!this.LstAnswer.getOption(i).checkEqual(q.LstAnswer.getOption(i)))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
         }
 
         public bool isCorrect(int index)
@@ -132,11 +119,6 @@ namespace ModuleSoanDe
         public bool isChosen()
         {
             return _chosenIndex > -1;
-        }
-
-        public void setAnswerDataSource(ListBox lb)
-        {
-            _lstAnswer.setDatasource(lb);
         }
 
         public string getOptionAsString(int index)
@@ -163,5 +145,24 @@ namespace ModuleSoanDe
         {
             return _title;
         }
+
+        public bool checkEqual(Question q)
+        {
+            if (q.Category.Title == this.Category.Title
+               && q.Title == this.Title
+               && q.CorrectIndex == this.CorrectIndex)
+            {
+                for (int i = 0; i < _lstAnswer.Size; i++)
+                {
+                    if (!this.LstAnswer.getOption(i).checkEqual(q.LstAnswer.getOption(i)))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
     }
 }

@@ -49,7 +49,7 @@ namespace ModuleThiTN
             this.txtEmail.Location = new System.Drawing.Point(112, 169);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(713, 35);
-            this.txtEmail.TabIndex = 16;
+            this.txtEmail.TabIndex = 4;
             // 
             // txtName
             // 
@@ -59,7 +59,7 @@ namespace ModuleThiTN
             this.txtName.Location = new System.Drawing.Point(112, 128);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(713, 35);
-            this.txtName.TabIndex = 17;
+            this.txtName.TabIndex = 3;
             // 
             // txtId
             // 
@@ -69,7 +69,7 @@ namespace ModuleThiTN
             this.txtId.Location = new System.Drawing.Point(112, 87);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(713, 35);
-            this.txtId.TabIndex = 18;
+            this.txtId.TabIndex = 2;
             // 
             // label3
             // 
@@ -89,7 +89,7 @@ namespace ModuleThiTN
             this.btnChooseTest.Location = new System.Drawing.Point(12, 43);
             this.btnChooseTest.Name = "btnChooseTest";
             this.btnChooseTest.Size = new System.Drawing.Size(813, 34);
-            this.btnChooseTest.TabIndex = 13;
+            this.btnChooseTest.TabIndex = 1;
             this.btnChooseTest.Text = "Choose test";
             this.btnChooseTest.UseVisualStyleBackColor = true;
             this.btnChooseTest.Click += new System.EventHandler(this.btnChooseTest_Click);
@@ -109,11 +109,11 @@ namespace ModuleThiTN
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnExit.Location = new System.Drawing.Point(12, 259);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(813, 34);
-            this.btnExit.TabIndex = 14;
+            this.btnExit.TabIndex = 6;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -126,7 +126,7 @@ namespace ModuleThiTN
             this.btnBegin.Location = new System.Drawing.Point(12, 219);
             this.btnBegin.Name = "btnBegin";
             this.btnBegin.Size = new System.Drawing.Size(813, 34);
-            this.btnBegin.TabIndex = 15;
+            this.btnBegin.TabIndex = 5;
             this.btnBegin.Text = "Begin Test";
             this.btnBegin.UseVisualStyleBackColor = true;
             this.btnBegin.Click += new System.EventHandler(this.btnBegin_Click);

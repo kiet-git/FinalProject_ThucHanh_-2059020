@@ -21,7 +21,7 @@ namespace ModuleSoanDe
 
         private void loadTestAnswer()
         {
-            FormDirectory fd = new FormDirectory();
+            ProjectDirectory fd = new ProjectDirectory();
 
             string[] answerFiles = Directory.GetFiles(fd.getFolder("answerDir"));
             List<string> lstAnswerFiles = new List<string>(answerFiles);

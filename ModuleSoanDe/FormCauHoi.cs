@@ -29,9 +29,11 @@ namespace ModuleSoanDe
             question = q;
 
             uscInputAnswer = new uscMCAInput(question);
+
             cmbxCategory.DataSource = question.Category.PotentialValue;
             cmbxCategory.SelectedItem = question.Category.Title;
             txtQuestion.Text = question.Title;
+            
             txtQuestion.Select();
         }
 
@@ -58,7 +60,7 @@ namespace ModuleSoanDe
                || question.CorrectIndex < 0)
             {
                 MessageBox.Show(
-                    "Field Empty! Please enter data for all fields",
+                    "Field Empty! Cannot save! Please enter data for all fields",
                     "Warning!",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -93,21 +95,38 @@ namespace ModuleSoanDe
 
         private void FormCauHoi_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!saveData())
-            {
-                DialogResult dr = MessageBox.Show("Do you want to quit? Your data will not be saved.",
-                    "Information!",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show(
+                "Do you want to save your data?",
+                "Information!",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-                if (dr == DialogResult.Yes)
-                {
-                    FormCauHoi_ExitWithoutSave();
-                }
+            if(dr == DialogResult.No)
+            {
+                FormCauHoi_ExitWithoutSave();
             }
             else
             {
-                FormCauHoi_ExitNormal();
+                if (!saveData())
+                {
+                    DialogResult dr2 = MessageBox.Show(
+                        "Do you want to exit without save?",
+                        "Information!",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if(dr2 == DialogResult.Yes)
+                    {
+                        FormCauHoi_ExitWithoutSave();
+                    } else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    FormCauHoi_ExitNormal();
+                }
             }
         }
     }

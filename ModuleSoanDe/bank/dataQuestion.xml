@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<storage numberOfQuestion="12">
+<storage numberOfQuestion="11">
   <question questionNumber="0" numberOfAnswer="5">
     <category>Phần mềm</category>
     <title>Cau 1 - 1</title>
@@ -129,14 +129,6 @@
       <option>2</option>
       <option>3</option>
       <option>4</option>
-    </answer>
-  </question>
-  <question questionNumber="11" numberOfAnswer="1">
-    <category>Mạng</category>
-    <title>sdasdad</title>
-    <correctIndex>0</correctIndex>
-    <answer>
-      <option>adasdasd</option>
     </answer>
   </question>
 </storage>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace ModuleSoanDe
@@ -152,6 +151,17 @@ namespace ModuleSoanDe
             if (dr == DialogResult.Yes)
             {
                 writeToXML();
+            } else
+            {
+                DialogResult dr2 = MessageBox.Show(
+                     "Do you want to quit?",
+                     "Information!",
+                     MessageBoxButtons.YesNo,
+                     MessageBoxIcon.Information);
+                if(dr2 == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }

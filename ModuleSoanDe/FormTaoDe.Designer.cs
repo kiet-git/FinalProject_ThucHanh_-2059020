@@ -95,13 +95,14 @@ namespace ModuleSoanDe
             this.btnAddQ.Location = new System.Drawing.Point(330, 179);
             this.btnAddQ.Name = "btnAddQ";
             this.btnAddQ.Size = new System.Drawing.Size(129, 34);
-            this.btnAddQ.TabIndex = 5;
+            this.btnAddQ.TabIndex = 6;
             this.btnAddQ.Text = "Add Question";
             this.btnAddQ.UseVisualStyleBackColor = true;
             this.btnAddQ.Click += new System.EventHandler(this.btnAddQ_Click);
             // 
             // lbFinal
             // 
+            this.lbFinal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbFinal.AutoSize = true;
             this.lbFinal.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbFinal.Location = new System.Drawing.Point(583, 56);
@@ -117,7 +118,7 @@ namespace ModuleSoanDe
             this.btnDelete.Location = new System.Drawing.Point(330, 232);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(129, 34);
-            this.btnDelete.TabIndex = 6;
+            this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -149,7 +150,7 @@ namespace ModuleSoanDe
             this.btnRandom.Location = new System.Drawing.Point(597, 9);
             this.btnRandom.Name = "btnRandom";
             this.btnRandom.Size = new System.Drawing.Size(181, 42);
-            this.btnRandom.TabIndex = 3;
+            this.btnRandom.TabIndex = 2;
             this.btnRandom.Text = "Randomize";
             this.btnRandom.UseVisualStyleBackColor = true;
             this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
@@ -161,7 +162,7 @@ namespace ModuleSoanDe
             this.btnClear.Location = new System.Drawing.Point(330, 285);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(129, 34);
-            this.btnClear.TabIndex = 7;
+            this.btnClear.TabIndex = 8;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -173,7 +174,7 @@ namespace ModuleSoanDe
             this.btnSave.Location = new System.Drawing.Point(475, 357);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(144, 34);
-            this.btnSave.TabIndex = 10;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Save to file";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -185,7 +186,7 @@ namespace ModuleSoanDe
             this.btnExit.Location = new System.Drawing.Point(636, 357);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(142, 34);
-            this.btnExit.TabIndex = 11;
+            this.btnExit.TabIndex = 10;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -197,7 +198,7 @@ namespace ModuleSoanDe
             this.btnView.Location = new System.Drawing.Point(330, 126);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(129, 34);
-            this.btnView.TabIndex = 4;
+            this.btnView.TabIndex = 5;
             this.btnView.Text = "View Question";
             this.btnView.UseVisualStyleBackColor = true;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
@@ -243,7 +244,7 @@ namespace ModuleSoanDe
             this.txtMonth.Location = new System.Drawing.Point(98, 352);
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(71, 39);
-            this.txtMonth.TabIndex = 8;
+            this.txtMonth.TabIndex = 3;
             this.txtMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbYear
@@ -264,7 +265,7 @@ namespace ModuleSoanDe
             this.txtYear.Location = new System.Drawing.Point(243, 352);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(71, 39);
-            this.txtYear.TabIndex = 8;
+            this.txtYear.TabIndex = 4;
             this.txtYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormTaoDe
