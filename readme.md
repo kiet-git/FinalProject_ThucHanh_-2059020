@@ -79,7 +79,7 @@ Chức năng tạo đề được chia làm hai loại, ngẫu nhiên và tự c
 3. ***List Box trái***: Lưu các câu hỏi có trong thư viện
 4. ***List Box Phải***: Lưu các câu hỏi được lựa chọn
 5. ***View Question***: Xem câu hỏi ở trong *List Box trái*, Form Cau Hoi sẽ được hiện lên nhưng khoá tất cả chức năng để người dùng không thể thay đổi được gì.
-6. ***Add Question***: Thêm thủ công câu hỏi
+6. ***Add Question***: Thêm thủ công câu hỏi. Chương trình có hỗ trợ kiểm tra câu hỏi trùng, nếu có sẽ không cho thêm vào.
 7. ***Delete***: Xoá câu hỏi bên *List Box phải*
 8. ***Clear***: Xoá tất cả câu hỏi bên *List Box phải*
 9. ***Month và Year***: Luu thời gian dự định cho bài thi
