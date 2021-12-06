@@ -8,7 +8,7 @@ namespace ModuleSoanDe
 { 
     public class FormCauHoiCreator
     {
-        private QuestionCollection _iqc;
+        private NormalQCollection _iqc;
         private bool _isLocked = false;
 
         public bool IsLocked
@@ -19,7 +19,7 @@ namespace ModuleSoanDe
             }
         }
 
-        public FormCauHoiCreator(QuestionCollection qc, bool locked)
+        public FormCauHoiCreator(NormalQCollection qc, bool locked)
         {
             _iqc = qc;
             _isLocked = locked;

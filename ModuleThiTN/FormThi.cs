@@ -6,10 +6,9 @@ namespace ModuleThiTN
 {
     public partial class FormThi : Form
     {
-        Test test = new Test();
         string filePath;
 
-        EmployeeTest currentTest;
+        EmTestQCollection currentTest = new EmTestQCollection();
 
         public FormThi()
         {
@@ -48,9 +47,10 @@ namespace ModuleThiTN
                 return;
             }
 
-            test.readXML(filePath);
+            currentTest.XMLExecuter = new TestXMLExecuter(currentTest);
+            currentTest.readXML(filePath);
              
-            if (test.Size == 0
+            if (currentTest.Size == 0
                 || String.IsNullOrEmpty(txtId.Text)
                 || String.IsNullOrEmpty(txtName.Text)
                 || String.IsNullOrEmpty(txtEmail.Text)
@@ -63,7 +63,9 @@ namespace ModuleThiTN
                 return;
             }
 
-            currentTest = new EmployeeTest(new Employee(txtId.Text, txtName.Text, txtEmail.Text), test);
+            currentTest.EmId = txtId.Text;
+            currentTest.EmName = txtName.Text;
+            currentTest.EmEmail = txtEmail.Text;
             FormLamBai flb = new FormLamBai(currentTest);
             flb.FormLamBai_Exit += new FormLamBai.FormLamBai_ExitHandle(closeCurrent);
             this.Hide();

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModuleSoanDe;
 
@@ -13,8 +7,7 @@ namespace ModuleThiTN
 {
     public partial class FormLamBai : Form
     {
-        EmployeeTest currentTest;
-        QuestionCollection testQuestion;
+        EmTestQCollection currentTest;
 
         public delegate void FormLamBai_ExitHandle();
         public event FormLamBai_ExitHandle FormLamBai_Exit;
@@ -24,20 +17,18 @@ namespace ModuleThiTN
         Color green = Color.FromArgb(144, 234, 144);
         Color black = Color.Black;
 
-        string filePath;
         const int TIME_FOR_A_QUESTION = 15;
         bool outOfTime = false;
 
-        public FormLamBai(EmployeeTest t)
+        public FormLamBai(EmTestQCollection qc)
         {
             InitializeComponent();
 
-            currentTest = t;
-            testQuestion = t.CurrentTest.Collection;
+            currentTest = qc;
 
             lvwQuestion.Items.Clear();
             
-            foreach(var q in testQuestion.LstQuestion)
+            foreach(var q in qc.LstQuestion)
             {
                 ListViewItem lvi = new ListViewItem()
                 {
@@ -49,16 +40,16 @@ namespace ModuleThiTN
                 lvwQuestion.Items.Add(lvi);
             }
 
-            uta = new uscTestAnswer(testQuestion.getQuestion(0));
+            uta = new uscTestAnswer(currentTest.getQuestion(0));
             uta.uscTestAnswer_Checked += new uscTestAnswer.uscTestAnswer_CheckedHandler(normalizeColor);
             uta.Location = new Point(250, 130);
             uta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             this.Controls.Add(uta);
 
             lvwQuestion.SelectedIndices.Add(0);
-            lbQuestion.Text = $"No. {1}: {testQuestion.getQuestion(0).Title}";
+            lbQuestion.Text = $"No. {1}: {currentTest.getQuestion(0).Title}";
 
-            int tempTime = TIME_FOR_A_QUESTION * testQuestion.Size; 
+            int tempTime = TIME_FOR_A_QUESTION * currentTest.Size; 
 
             uscClock1._mm = tempTime / 60;
             uscClock1._ss = tempTime % 60;
@@ -84,7 +75,7 @@ namespace ModuleThiTN
         {
             if (lvwQuestion.SelectedIndices.Count > 0 && lvwQuestion.SelectedIndices[0] > -1)
             {
-                if (testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]).isChosen())
+                if (currentTest.getQuestion(lvwQuestion.SelectedIndices[0]).isChosen())
                 {
                     lvwQuestion.FocusedItem.BackColor = green;
                 }
@@ -129,8 +120,8 @@ namespace ModuleThiTN
         {
             if (lvwQuestion.SelectedIndices.Count > 0 && lvwQuestion.SelectedIndices[0] > -1)
             {
-                lbQuestion.Text = $"No. {lvwQuestion.SelectedIndices[0] + 1}: {testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]).Title}";
-                uta.setQuestion(testQuestion.getQuestion(lvwQuestion.SelectedIndices[0]));
+                lbQuestion.Text = $"No. {lvwQuestion.SelectedIndices[0] + 1}: {currentTest.getQuestion(lvwQuestion.SelectedIndices[0]).Title}";
+                uta.setQuestion(currentTest.getQuestion(lvwQuestion.SelectedIndices[0]));
             }
         }
 
@@ -152,7 +143,7 @@ namespace ModuleThiTN
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (lvwQuestion.SelectedIndices[0] < testQuestion.Size - 1)
+            if (lvwQuestion.SelectedIndices[0] < currentTest.Size - 1)
             {
                 int temp = lvwQuestion.SelectedIndices[0] + 1;
                 lvwQuestion.SelectedIndices.Clear();
@@ -183,8 +174,8 @@ namespace ModuleThiTN
             DialogResult dr = fbd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                filePath = fbd.SelectedPath + $"\\empTest-{currentTest.CurrentEm.Id}-{currentTest.CurrentTest.Id}.xml";
-                saveTest();
+                string filePath = fbd.SelectedPath + $"\\empTest-{currentTest.EmId}-{currentTest.Id}.xml";
+                saveTest(filePath);
             } else if (dr == DialogResult.Cancel)
             {
                 MessageBox.Show(
@@ -219,8 +210,9 @@ namespace ModuleThiTN
             }
         }
 
-        private void saveTest()
+        private void saveTest(string filePath)
         {
+            currentTest.XMLExecuter = new EmployeeTestXMLExecuter(currentTest);
             currentTest.writeXML(filePath);
         }
     }

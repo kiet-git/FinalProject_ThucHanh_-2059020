@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace ModuleSoanDe
@@ -11,7 +8,7 @@ namespace ModuleSoanDe
     {
         FormDirectory fd = new FormDirectory();
 
-        public void write(List<EmployeeTest> lstET, string filePath)
+        public void write(List<EmTestQCollection> lstET, string filePath)
         {
             filePath = fd.getFolder("resultDir") + filePath;
             using (StreamWriter sw = new StreamWriter(filePath))
@@ -19,10 +16,10 @@ namespace ModuleSoanDe
                 sw.WriteLine($"Result of ITEC test: ");
                 foreach(var em in lstET)
                 {
-                    sw.WriteLine($"Test Id: {em.CurrentTest.Id} " +
-                        $"| Month: {em.CurrentTest.Month} | Year: {em.CurrentTest.Year} " +
-                        $"| EmID: {em.CurrentEm.Id} | EmName: {em.CurrentEm.Name} | EmEmail: {em.CurrentEm.Email} " +
-                        $"| Mark: {em.Mark} out of {em.CurrentTest.Size}");
+                    sw.WriteLine($"Test Id: {em.Id} " +
+                        $"| Month: {em.Month} | Year: {em.Year} " +
+                        $"| EmID: {em.EmId} | EmName: {em.EmName} | EmEmail: {em.EmEmail} " +
+                        $"| Mark: {em.Mark} out of {em.Size}");
                 }
             }
         }
@@ -32,393 +29,431 @@ namespace ModuleSoanDe
     {
         protected FormDirectory fd = new FormDirectory();
 
-        public abstract void writeQuestionCollection(QuestionCollection qc, string filePath);
-        public abstract void readQuestionCollection(QuestionCollection qc, string filePath);
+        private protected XMLRootHandler xmlRootHandler;
 
-        protected static void addQCToDocument(XmlDocument doc, XmlElement ele, QuestionCollection qc, bool checkCorrect)
+        private protected XMLQuestionNodeHandler xmlQuestionNodeHandler;
+
+        private protected XMLCategoryAndTitleHandler xmlCategoryAndTitleHandler = new XMLCategoryAndTitleHandler();
+
+        private protected XMLChosenCorrectHandler xmlChosenCorrectHandler;
+
+        private protected XMLAnswerHandler xmlAnswerHandler = new XMLAnswerHandler();
+
+        protected void writeTemplate(string filePath, string root, bool hasChosenOrCorrect, bool hasAnswer, IQCollection qc)
         {
-            ele.SetAttribute("numberOfQuestion", $"{qc.Size}");
+            XmlDocument doc = new XmlDocument();
 
-            int k = 0;
-            foreach (var q in qc.LstQuestion)
+            XmlElement storage = xmlRootHandler.write(doc, root);
+            for (int i = 0; i < qc.Size; i++)
             {
-                XmlElement question = doc.CreateElement("question");
-
-                question.SetAttribute("questionNumber", $"{k}");
-
-                if (checkCorrect)
+                Question q = qc.getQuestion(i);
+                XmlElement question = xmlQuestionNodeHandler.write(doc, storage, i, q);
+                xmlCategoryAndTitleHandler.write(doc, question, q);
+                if(hasChosenOrCorrect)
                 {
-                    question.SetAttribute("correctIndex", $"{q.CorrectIndex}");
+                    xmlChosenCorrectHandler.write(doc, question, q);
                 }
-                question.SetAttribute("numberOfAnswer", $"{q.LstAnswerSize}");
-
-                XmlElement category = doc.CreateElement("category");
-                category.InnerText = q.Category.Title;
-
-                XmlElement title = doc.CreateElement("title");
-                title.InnerText = q.Title;
-
-                XmlElement answer = doc.CreateElement("answer");
-                foreach (var i in q.LstAnswer.LstOption)
+                if(hasAnswer)
                 {
-                    XmlElement option = doc.CreateElement("option");
-                    option.InnerText = i.OptionName;
-                    answer.AppendChild(option);
+                    xmlAnswerHandler.write(doc, question, q);
                 }
-
-                question.AppendChild(category);
-                question.AppendChild(title);
-                question.AppendChild(answer);
-                ele.AppendChild(question);
-                k++;
             }
-        }
-    }
 
-    public class NormalXMLExecuter : IXMLExecuter
-    {
-        private XmlDocument doc;
-
-        private XmlElement storage;
-
-        private string bankDir;
-
-        public NormalXMLExecuter()
-        {
-            doc = new XmlDocument();
-            storage = doc.CreateElement("storage");
-            bankDir = fd.getFolder("bankDir");
+            doc.Save(XmlWriter.Create(filePath, new XmlWriterSettings() { Indent = true }));
         }
 
-        public override void writeQuestionCollection(QuestionCollection qc, string fileName)
+        protected void readTemplate(string filePath, string root, bool hasChosenOrCorrect, bool hasAnswer, IQCollection qc)
         {
-            if (qc.Size == 0)
-                return;
-
-            doc.AppendChild(storage);
-
-            addQCToDocument(doc, storage, qc, true);
-
-            fileName = bankDir + fileName;
-
-            doc.Save(XmlWriter.Create(fileName, new XmlWriterSettings() { Indent = true }));
-        }
-
-        public override void readQuestionCollection(QuestionCollection qc, string fileName)
-        {
-            fileName = bankDir + fileName;
-            using (var xml = XmlReader.Create(fileName))
+            using (var xml = XmlReader.Create(filePath))
             {
-                xml.ReadToFollowing("storage");
-                xml.MoveToAttribute("numberOfQuestion");
-                int n = int.Parse(xml.Value);
+                int n = xmlRootHandler.read(xml, root);
 
                 for (int i = 0; i < n; i++)
                 {
                     Question q = new Question();
-                    xml.ReadToFollowing("question");
 
-                    xml.MoveToAttribute("correctIndex");
-                    int temp = int.Parse(xml.Value);
-
-                    xml.MoveToAttribute("numberOfAnswer");
-                    int m = int.Parse(xml.Value);
-
-                    xml.ReadToFollowing("category");
-                    q.Category = new Category();
-                    q.Category.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("title");
-                    q.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("answer");
-                    for (int j = 0; j < m; j++)
+                    int m = xmlQuestionNodeHandler.read(xml);
+                    xmlCategoryAndTitleHandler.read(xml, q);
+                    if(hasChosenOrCorrect)
                     {
-                        xml.ReadToFollowing("option");
-                        Option mco = new Option(xml.ReadElementContentAsString());
-                        q.addOption(mco);
+                        xmlChosenCorrectHandler.read(xml, q);
+                    }
+                    if(hasAnswer)
+                    {
+                        xmlAnswerHandler.read(xml, q, m);
                     }
 
-                    q.CorrectIndex = temp;
                     qc.addQuestion(q);
                 }
             }
+        }
+
+        public abstract void write(string filePath);
+        public abstract void read(string filePath);
+    }
+
+    public class NormalXMLExecuter : IXMLExecuter
+    {
+        private string bankDir;
+
+        private NormalQCollection _normalCollection;
+
+        private const string ROOT_NAME = "storage";
+
+        public NormalXMLExecuter(NormalQCollection qc)
+        {
+            _normalCollection = qc;
+
+            bankDir = fd.getFolder("bankDir");
+
+            xmlRootHandler = new XMLNormalRootHandler(_normalCollection);
+            xmlQuestionNodeHandler = new XMLWithAnswerQNodeHandler();
+            xmlChosenCorrectHandler = new XMLCorrectIndexHandler();
+        }
+
+        public override void write(string fileName)
+        {
+            if (_normalCollection.Size == 0)
+                return;
+
+            fileName = bankDir + fileName;
+            writeTemplate(fileName, ROOT_NAME, true, true, _normalCollection);
+        }
+
+
+        public override void read(string fileName)
+        {
+            fileName = bankDir + fileName;
+            readTemplate(fileName, ROOT_NAME, true, true, _normalCollection);
         }
     }
 
     public class TestXMLExecuter : IXMLExecuter
     {
-        private XmlDocument docTest;
-
-        private XmlElement test;
-
         private string testDir;
 
+        private TestQCollection _testCollection;
 
-        private TestIdentification _td;
+        private const string ROOT_NAME = "test";
 
-        public TestXMLExecuter(TestIdentification td)
+        public TestXMLExecuter(TestQCollection qc)
         {
-            _td = td;
+            _testCollection = qc;
 
-            docTest = new XmlDocument();
-            test = docTest.CreateElement("test");
-            docTest.AppendChild(test);
+            xmlRootHandler = new XMLTestRootHandler(_testCollection);
+            xmlQuestionNodeHandler = new XMLWithAnswerQNodeHandler();
 
             testDir = fd.getFolder("testDir");
         }
 
-        public override void writeQuestionCollection(QuestionCollection qc, string fileName)
+        public override void write(string fileName)
         {
-            if (qc.Size == 0)
+            if (_testCollection.Size == 0)
                 return;
-
-            test.SetAttribute("id", $"{_td.Id}");
-            test.SetAttribute("month", $"{_td.Month}");
-            test.SetAttribute("year", $"{_td.Year}");
-
-            addQCToDocument(docTest, test, qc, false);
 
             string testFileDir = testDir + "test-" + fileName;
 
-            docTest.Save(XmlWriter.Create(testFileDir, new XmlWriterSettings() { Indent = true }));
-
-            qc.XMLExecuter = new CorrectAnswerXMLExecuter(_td);
-            qc.writeXML(fileName);
+            writeTemplate(testFileDir, ROOT_NAME, false, true, _testCollection);
+            
+            _testCollection.XMLExecuter = new CorrectAnswerXMLExecuter(_testCollection);
+            _testCollection.writeXML(fileName);
         }
 
-        public override void readQuestionCollection(QuestionCollection qc, string fileName)
+        public override void read(string fileName)
         {
-            using (var xml = XmlReader.Create(fileName))
-            {
-                xml.ReadToFollowing("test");
-
-                xml.MoveToAttribute("month");
-                _td.Month = uint.Parse(xml.Value);
-                xml.MoveToAttribute("year");
-                _td.Year = uint.Parse(xml.Value);
-
-                xml.MoveToAttribute("numberOfQuestion");
-                int n = int.Parse(xml.Value);
-
-                for (int i = 0; i < n; i++)
-                {
-                    Question q = new Question();
-                    xml.ReadToFollowing("question");
-
-                    xml.MoveToAttribute("numberOfAnswer");
-                    int m = int.Parse(xml.Value);
-
-                    xml.ReadToFollowing("category");
-                    q.Category = new Category();
-                    q.Category.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("title");
-                    q.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("answer");
-                    for (int j = 0; j < m; j++)
-                    {
-                        xml.ReadToFollowing("option");
-                        Option mco = new Option(xml.ReadElementContentAsString());
-                        q.addOption(mco);
-                    }
-
-                    qc.addQuestion(q);
-                }
-            }
+            readTemplate(fileName, ROOT_NAME, false, true, _testCollection);
         }
     }
 
     public class EmployeeTestXMLExecuter : IXMLExecuter
     {
-        private XmlDocument docEmTest;
+        private EmTestQCollection _emTestCollection;
 
-        private XmlElement test;
+        private const string ROOT_NAME = "test";
 
-        private TestIdentification _td;
-
-        private Employee _em;
-
-        public EmployeeTestXMLExecuter(TestIdentification td, Employee e)
+        public EmployeeTestXMLExecuter(EmTestQCollection qc)
         {
-            _td = td;
-            _em = e;
+            _emTestCollection = qc;
 
-            docEmTest = new XmlDocument();
-            test = docEmTest.CreateElement("test");
-            docEmTest.AppendChild(test);
+            xmlRootHandler = new XMLEmTestRootHandler(_emTestCollection);
+            xmlQuestionNodeHandler = new XMLQuestionNodeHandler();
+            xmlChosenCorrectHandler = new XMLChosenIndexHandler();
         }
 
-        public override void writeQuestionCollection(QuestionCollection qc, string filePath)
+        public override void write(string filePath)
         {
-            if (qc.Size == 0)
+            if (_emTestCollection.Size == 0)
                 return;
 
-            test.SetAttribute("id", $"{_td.Id}");
-            test.SetAttribute("month", $"{_td.Month}");
-            test.SetAttribute("year", $"{_td.Year}");
-            test.SetAttribute("numberOfQuestion", $"{qc.Size}");
-
-            XmlElement employee = docEmTest.CreateElement("employee");
-            employee.SetAttribute("emId", _em.Id);
-            employee.SetAttribute("emName", _em.Name);
-            employee.SetAttribute("emEmail", _em.Email);
-            test.AppendChild(employee);
-
-            int i = 0;
-            foreach (var q in qc.LstQuestion)
-            {
-                XmlElement question = docEmTest.CreateElement("question");
-                question.SetAttribute("questionNumber", $"{i}");
-
-                XmlElement category = docEmTest.CreateElement("category");
-                category.InnerText = q.Category.Title;
-
-                XmlElement title = docEmTest.CreateElement("title");
-                title.InnerText = q.Title;
-
-                XmlElement chosenAnswer = docEmTest.CreateElement("chosenAnswer");
-                chosenAnswer.InnerText = q.ChosenIndex.ToString();
-
-                question.AppendChild(category);
-                question.AppendChild(title);
-                question.AppendChild(chosenAnswer);
-                test.AppendChild(question);
-                i++;
-            }
-
-            docEmTest.Save(XmlWriter.Create(filePath, new XmlWriterSettings() { Indent = true }));
+            writeTemplate(filePath, ROOT_NAME, true, false, _emTestCollection);
         }
 
-        public override void readQuestionCollection(QuestionCollection qc, string filePath)
+        public override void read(string filePath)
         {
-            using (var xml = XmlReader.Create(filePath))
-            {
-                xml.ReadToFollowing("test");
-
-                xml.MoveToAttribute("numberOfQuestion");
-                int n = int.Parse(xml.Value);
-
-                xml.MoveToAttribute("month");
-                _td.Month = uint.Parse(xml.Value);
-                xml.MoveToAttribute("year");
-                _td.Year = uint.Parse(xml.Value);
-
-                xml.ReadToFollowing("employee");
-                xml.MoveToAttribute("emId");
-                _em.Id = xml.Value;
-                xml.MoveToAttribute("emName");
-                _em.Name = xml.Value;
-                xml.MoveToAttribute("emEmail");
-                _em.Email = xml.Value;
-
-
-                for (int i = 0; i < n; i++)
-                {
-                    Question q = new Question();
-                    xml.ReadToFollowing("question");
- 
-                    xml.ReadToFollowing("category");
-                    q.Category = new Category();
-                    q.Category.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("title");
-                    q.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("chosenAnswer");
-                    q.ChosenIndex = xml.ReadElementContentAsInt();
-
-                    qc.addQuestion(q);
-                }
-            }
+            readTemplate(filePath, ROOT_NAME, true, false, _emTestCollection);
         }
 
     }
 
     public class CorrectAnswerXMLExecuter : IXMLExecuter
     {
-        private XmlDocument docAnswer;
-
-        private XmlElement answer;
-
-        private TestIdentification _td;
+        private TestQCollection _testCollection;
 
         private string answerDir;
 
-        public CorrectAnswerXMLExecuter(TestIdentification td)
-        {
-            _td = td;
+        private const string ROOT_NAME = "answer";
 
-            docAnswer = new XmlDocument();
-            answer = docAnswer.CreateElement("answer");
-            docAnswer.AppendChild(answer);
+        public CorrectAnswerXMLExecuter(TestQCollection qc)
+        {
+            _testCollection = qc;
+
+            xmlRootHandler = new XMLTestRootHandler(_testCollection);
+            xmlQuestionNodeHandler = new XMLQuestionNodeHandler();
+            xmlChosenCorrectHandler = new XMLCorrectIndexHandler();
 
             answerDir = fd.getFolder("answerDir");
         }
 
-        public override void writeQuestionCollection(QuestionCollection qc, string fileName)
+        public override void write(string fileName)
         {
-            int i = 0;
-            answer.SetAttribute("id", $"{_td.Id}");
-            answer.SetAttribute("month", $"{_td.Month}");
-            answer.SetAttribute("year", $"{_td.Year}");
-            answer.SetAttribute("numberOfQuestion", $"{qc.Size}");
-            foreach (var q in qc.LstQuestion)
-            {
-                XmlElement question = docAnswer.CreateElement("question");
-                question.SetAttribute("questionNumber", $"{i}");
-
-                XmlElement category = docAnswer.CreateElement("category");
-                category.InnerText = q.Category.Title;
-
-                XmlElement title = docAnswer.CreateElement("title");
-                title.InnerText = q.Title;
-
-                XmlElement correctAnswer = docAnswer.CreateElement("correctAnswer");
-                correctAnswer.InnerText = q.CorrectIndex.ToString();
-
-                question.AppendChild(category);
-                question.AppendChild(title);
-                question.AppendChild(correctAnswer);
-                answer.AppendChild(question);
-                i++;
-            }
-
             string answerFileDir = answerDir + "answer-" + fileName;
 
-            docAnswer.Save(XmlWriter.Create(answerFileDir, new XmlWriterSettings() { Indent = true }));
+            writeTemplate(answerFileDir, ROOT_NAME, true, false, _testCollection);
         }
-        public override void readQuestionCollection(QuestionCollection qc, string filePath)
+        public override void read(string filePath)
         {
-            using (var xml = XmlReader.Create(filePath))
+            readTemplate(filePath, ROOT_NAME, true, false, _testCollection);
+        }
+    }
+
+    //1
+    interface XMLRootHandler
+    {
+        XmlElement write(XmlDocument doc, string name);
+
+        int read(XmlReader xml, string name);
+    }
+    
+    class XMLNormalRootHandler : XMLRootHandler
+    {
+        NormalQCollection _normalCollection;
+
+        public XMLNormalRootHandler(NormalQCollection qc)
+        {
+            _normalCollection = qc;
+        } 
+
+        public XmlElement write(XmlDocument doc, string name)
+        {
+            XmlElement ele = doc.CreateElement(name);
+            ele.SetAttribute("numberOfQuestion", $"{_normalCollection.Size}");
+            doc.AppendChild(ele);
+            return ele;
+        }
+
+        public int read(XmlReader xml, string name)
+        {
+            xml.ReadToFollowing(name);
+            xml.MoveToAttribute("numberOfQuestion");
+            return int.Parse(xml.Value); ;
+        }
+    }
+
+    class XMLTestRootHandler : XMLRootHandler
+    {
+        TestQCollection _testCollection;
+
+        public XMLTestRootHandler(TestQCollection qc)
+        {
+            _testCollection = qc;
+        }
+
+        public virtual XmlElement write(XmlDocument doc, string name)
+        {
+            XmlElement ele = doc.CreateElement(name);
+            ele.SetAttribute("id", $"{_testCollection.Id}");
+            ele.SetAttribute("month", $"{_testCollection.Month}");
+            ele.SetAttribute("year", $"{_testCollection.Year}");
+            ele.SetAttribute("numberOfQuestion", $"{_testCollection.Size}");
+            doc.AppendChild(ele);
+            return ele;
+        }
+        public virtual int read(XmlReader xml, string name)
+        {
+            xml.ReadToFollowing(name);
+
+            xml.MoveToAttribute("month");
+            _testCollection.Month = uint.Parse(xml.Value);
+            xml.MoveToAttribute("year");
+            _testCollection.Year = uint.Parse(xml.Value);
+
+            xml.MoveToAttribute("numberOfQuestion");
+            return int.Parse(xml.Value);
+        }
+    }
+
+    class XMLEmTestRootHandler : XMLTestRootHandler
+    {
+        EmTestQCollection _emTestCollection;
+
+        public XMLEmTestRootHandler(EmTestQCollection qc) : base(qc)
+        {
+            _emTestCollection = qc;
+        }
+
+        public override XmlElement write(XmlDocument doc, string name)
+        {
+            XmlElement ele = base.write(doc, name);
+            XmlElement employee = doc.CreateElement("employee");
+            employee.SetAttribute("emId", _emTestCollection.EmId);
+            employee.SetAttribute("emName", _emTestCollection.EmName);
+            employee.SetAttribute("emEmail", _emTestCollection.EmEmail);
+            ele.AppendChild(employee);
+            return ele;
+        }
+
+        public override int read(XmlReader xml, string name)
+        {
+            int n = base.read(xml, name);
+
+            xml.ReadToFollowing("employee");
+            xml.MoveToAttribute("emId");
+            _emTestCollection.EmId = xml.Value;
+            xml.MoveToAttribute("emName");
+            _emTestCollection.EmName = xml.Value;
+            xml.MoveToAttribute("emEmail");
+            _emTestCollection.EmEmail = xml.Value;
+
+            return n;
+        }
+
+
+    }
+
+    //2
+    class XMLQuestionNodeHandler
+    {
+        public virtual XmlElement write(XmlDocument doc, XmlElement ele, int n, Question q)
+        {
+            XmlElement question = doc.CreateElement("question");
+            question.SetAttribute("questionNumber", $"{n}");
+            ele.AppendChild(question);
+            return question;
+        }
+
+        public virtual int read(XmlReader xml) {
+            return 0;
+        }
+    }
+
+    class XMLWithAnswerQNodeHandler : XMLQuestionNodeHandler
+    {
+        public override XmlElement write(XmlDocument doc, XmlElement ele, int n, Question q)
+        {
+            XmlElement question = base.write(doc, ele, n, q);
+            question.SetAttribute("numberOfAnswer", $"{q.LstAnswerSize}");
+            return question;
+        }
+
+        public override int read(XmlReader xml)
+        {
+            xml.ReadToFollowing("question");
+            xml.MoveToAttribute("numberOfAnswer");
+            return int.Parse(xml.Value);
+        }
+    }
+
+    //3
+    class XMLCategoryAndTitleHandler
+    {
+        public void write(XmlDocument doc, XmlElement ele, Question q)
+        {
+            XmlElement category = doc.CreateElement("category");
+            category.InnerText = q.Category.Title;
+
+            XmlElement title = doc.CreateElement("title");
+            title.InnerText = q.Title;
+
+            ele.AppendChild(category);
+            ele.AppendChild(title);
+        }
+
+        public void read(XmlReader xml, Question q)
+        {
+            xml.ReadToFollowing("category");
+            q.Category = new Category();
+            q.Category.Title = xml.ReadElementContentAsString();
+
+            xml.ReadToFollowing("title");
+            q.Title = xml.ReadElementContentAsString();
+        }
+    }
+
+    //4 
+    interface XMLChosenCorrectHandler
+    {
+        void write(XmlDocument doc, XmlElement ele, Question q);
+
+        void read(XmlReader xml, Question q);
+    }
+
+    class XMLCorrectIndexHandler : XMLChosenCorrectHandler
+    {
+        public void write(XmlDocument doc, XmlElement ele, Question q)
+        {
+            XmlElement correctAnswer = doc.CreateElement("correctIndex");
+            correctAnswer.InnerText = q.CorrectIndex.ToString();
+
+            ele.AppendChild(correctAnswer);
+        }
+
+        public void read(XmlReader xml, Question q)
+        {
+            xml.ReadToFollowing("correctIndex");
+            q.CorrectIndex = xml.ReadElementContentAsInt();
+        }
+    }
+
+    class XMLChosenIndexHandler : XMLChosenCorrectHandler
+    {
+        public void write(XmlDocument doc, XmlElement ele, Question q)
+        {
+            XmlElement chosenIndex = doc.CreateElement("chosenIndex");
+            chosenIndex.InnerText = q.ChosenIndex.ToString();
+
+            ele.AppendChild(chosenIndex);
+        }
+
+        public void read(XmlReader xml, Question q)
+        {
+            xml.ReadToFollowing("chosenIndex");
+            q.ChosenIndex = xml.ReadElementContentAsInt();
+        }
+    }
+
+    //5
+    class XMLAnswerHandler
+    {
+        public void write(XmlDocument doc, XmlElement ele, Question q)
+        {
+            XmlElement answer = doc.CreateElement("answer");
+            foreach (var i in q.LstAnswer.LstOption)
             {
-                xml.ReadToFollowing("answer");
-                xml.MoveToAttribute("month");
-                _td.Month = uint.Parse(xml.Value);
-                xml.MoveToAttribute("year");
-                _td.Year = uint.Parse(xml.Value);
+                XmlElement option = doc.CreateElement("option");
+                option.InnerText = i.OptionName;
+                answer.AppendChild(option);
+            }
+            ele.AppendChild(answer);
+        }
 
-                xml.MoveToAttribute("numberOfQuestion");
-                int n = int.Parse(xml.Value);
-
-                for (int i = 0; i < n; i++)
-                {
-                    Question q = new Question();
-                    xml.ReadToFollowing("question");
-
-                    xml.ReadToFollowing("category");
-                    q.Category = new Category();
-                    q.Category.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("title");
-                    q.Title = xml.ReadElementContentAsString();
-
-                    xml.ReadToFollowing("correctAnswer");
-                    q.CorrectIndex = xml.ReadElementContentAsInt();
-
-                    qc.addQuestion(q);
-                }
+        public void read(XmlReader xml, Question q, int m)
+        {
+            xml.ReadToFollowing("answer");
+            for (int j = 0; j < m; j++)
+            {
+                xml.ReadToFollowing("option");
+                Option mco = new Option(xml.ReadElementContentAsString());
+                q.addOption(mco);
             }
         }
     }

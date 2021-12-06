@@ -6,7 +6,7 @@ namespace ModuleSoanDe
 {
     public partial class FormSoanCauHoi : Form
     {
-        QuestionCollection questionCollection = new QuestionCollection();
+        NormalQCollection questionCollection = new NormalQCollection();
 
         string defaultPath = @"dataQuestion.xml";
 
@@ -17,7 +17,6 @@ namespace ModuleSoanDe
         {
             InitializeComponent();
 
-            questionCollection.XMLExecuter = new NormalXMLExecuter();
             questionCollection.readXML(defaultPath);
             questionCollection.setDatasource(listBoxQuestions);
         }

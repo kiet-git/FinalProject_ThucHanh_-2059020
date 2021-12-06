@@ -7,10 +7,9 @@ namespace ModuleSoanDe
     public partial class FormTaoDe : Form
     {
         string defaultInputFile = @"dataQuestion.xml";
-        string defaultOutputFile = @"dataTest.xml"; //test-{id}
 
-        QuestionCollection quesColInput = new QuestionCollection();
-        QuestionCollection quesColOutput = new QuestionCollection();
+        NormalQCollection quesColInput = new NormalQCollection();
+        TestQCollection quesColOutput = new TestQCollection();
 
         bool isSaved = true;
 
@@ -23,7 +22,6 @@ namespace ModuleSoanDe
 
         private void FormTaoDe_Load(object sender, EventArgs e)
         {
-            quesColInput.XMLExecuter = new NormalXMLExecuter();
             quesColInput.readXML(defaultInputFile);
             txtAvailable.Text = quesColInput.Size.ToString();
 
@@ -44,7 +42,7 @@ namespace ModuleSoanDe
                 return;
             }
 
-            quesColOutput = quesColInput.randomizeQuestionToTest(noOfQ);
+            quesColOutput.LstQuestion = quesColInput.randomizeQuestionToTest(noOfQ);
             quesColOutput.setDatasource(listBoxQOut);
             isSaved = false;
         }
@@ -120,8 +118,9 @@ namespace ModuleSoanDe
             if (isSaved || quesColOutput.Size == 0)
                 return;
 
-            Test test = new Test(quesColOutput, month, year);
-            test.writeXML();
+            quesColOutput.Month = month;
+            quesColOutput.Year = year;
+            quesColOutput.writeXML("");
 
             MessageBox.Show(
                  "Your data is saved successfully",

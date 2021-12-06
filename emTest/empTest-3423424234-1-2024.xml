@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<test id="1-2024" month="1" year="2024" numberOfQuestion="5">
+  <employee emId="3423424234" emName="sdgdsdfgsdfg" emEmail="3424@ddffd" />
+  <question questionNumber="0">
+    <category>Bảo mật</category>
+    <title>Cau 7 - 3</title>
+    <chosenIndex>2</chosenIndex>
+  </question>
+  <question questionNumber="1">
+    <category>Phần mềm</category>
+    <title>Cau 6 - 2</title>
+    <chosenIndex>1</chosenIndex>
+  </question>
+  <question questionNumber="2">
+    <category>Mạng</category>
+    <title>Cau 8 - 4</title>
+    <chosenIndex>3</chosenIndex>
+  </question>
+  <question questionNumber="3">
+    <category>Phần mềm</category>
+    <title>Cau 2 - 2</title>
+    <chosenIndex>1</chosenIndex>
+  </question>
+  <question questionNumber="4">
+    <category>Phần mềm</category>
+    <title>34234</title>
+    <chosenIndex>0</chosenIndex>
+  </question>
+</test>

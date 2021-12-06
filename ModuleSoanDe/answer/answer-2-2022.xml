@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<answer id="2-2022" month="2" year="2022" numberOfQuestion="12">
+  <question questionNumber="0">
+    <category>Phần mềm</category>
+    <title>Cau 11 - 3</title>
+    <correctIndex>2</correctIndex>
+  </question>
+  <question questionNumber="1">
+    <category>Phần mềm</category>
+    <title>Cau 3 - 3</title>
+    <correctIndex>2</correctIndex>
+  </question>
+  <question questionNumber="2">
+    <category>Bảo mật</category>
+    <title>Cau 7 - 3</title>
+    <correctIndex>2</correctIndex>
+  </question>
+  <question questionNumber="3">
+    <category>Phần mềm</category>
+    <title>Cau 1 - 1</title>
+    <correctIndex>0</correctIndex>
+  </question>
+  <question questionNumber="4">
+    <category>Phần cứng</category>
+    <title>Cau 9 - 1</title>
+    <correctIndex>0</correctIndex>
+  </question>
+  <question questionNumber="5">
+    <category>Phần mềm</category>
+    <title>Cau 2 - 2</title>
+    <correctIndex>1</correctIndex>
+  </question>
+  <question questionNumber="6">
+    <category>Phần mềm</category>
+    <title>Cau 5 - 1</title>
+    <correctIndex>0</correctIndex>
+  </question>
+  <question questionNumber="7">
+    <category>Phần mềm</category>
+    <title>Cau 4 - 4</title>
+    <correctIndex>3</correctIndex>
+  </question>
+  <question questionNumber="8">
+    <category>Mạng</category>
+    <title>Cau 10 - 2</title>
+    <correctIndex>1</correctIndex>
+  </question>
+  <question questionNumber="9">
+    <category>Mạng</category>
+    <title>sdasdad</title>
+    <correctIndex>0</correctIndex>
+  </question>
+  <question questionNumber="10">
+    <category>Phần mềm</category>
+    <title>Cau 6 - 2</title>
+    <correctIndex>1</correctIndex>
+  </question>
+  <question questionNumber="11">
+    <category>Mạng</category>
+    <title>Cau 8 - 4</title>
+    <correctIndex>3</correctIndex>
+  </question>
+</answer>

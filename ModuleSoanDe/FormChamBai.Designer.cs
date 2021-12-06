@@ -83,7 +83,7 @@ namespace ModuleSoanDe
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.Size = new System.Drawing.Size(653, 39);
             this.txtFileName.TabIndex = 19;
-            this.txtFileName.Text = "result.txt";
+            this.txtFileName.Text = "result2.0";
             // 
             // lbQuestion
             // 

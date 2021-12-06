@@ -7,8 +7,8 @@ namespace ModuleSoanDe
 {
     public partial class FormChamBai : Form
     {
-        List<EmployeeTest> lstEmTest = new List<EmployeeTest>();
-        List<Test> lstTest = new List<Test>();
+        List<EmTestQCollection> lstEmTest = new List<EmTestQCollection>();
+        List<TestQCollection> lstTest = new List<TestQCollection>();
 
         string selectedPath;
         string defaultOutputPath = @"\result.txt";
@@ -28,8 +28,9 @@ namespace ModuleSoanDe
 
             foreach (var file in lstAnswerFiles)
             {
-                Test t = new Test();
-                t.readCorrectXML(file);
+                TestQCollection t = new TestQCollection();
+                t.XMLExecuter = new CorrectAnswerXMLExecuter(t);
+                t.readXML(file);
                 lstTest.Add(t);
             }
         }
@@ -61,7 +62,7 @@ namespace ModuleSoanDe
 
             foreach(var file in lstFiles)
             {
-                EmployeeTest et = new EmployeeTest();
+                EmTestQCollection et = new EmTestQCollection();
                 et.readXML(file);
                 lstEmTest.Add(et);
             }
@@ -84,10 +85,9 @@ namespace ModuleSoanDe
             {
                 foreach(var test in lstTest)
                 {
-                    if(emTest.CurrentTest.Id == test.Id)
+                    if(emTest.Id == test.Id)
                     {
-                        emTest.Mark = test.Collection.markTest(emTest.CurrentTest.Collection);
-                        MessageBox.Show(emTest.Mark.ToString(), test.Id);
+                        emTest.Mark = test.markTest(emTest);
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace ModuleSoanDe
             nre.write(lstEmTest, defaultOutputPath);
         }
 
-        private int sortMark(EmployeeTest a, EmployeeTest b)
+        private int sortMark(EmTestQCollection a, EmTestQCollection b)
         {
             if (a.Mark > b.Mark)
                 return -1;
