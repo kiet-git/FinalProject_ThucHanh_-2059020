@@ -212,7 +212,6 @@ namespace ModuleSoanDe
 
         int read(XmlReader xml, string name);
     }
-    
     class XMLNormalRootHandler : XMLRootHandler
     {
         NormalQCollection _normalCollection;
@@ -237,7 +236,6 @@ namespace ModuleSoanDe
             return int.Parse(xml.Value); ;
         }
     }
-
     class XMLTestRootHandler : XMLRootHandler
     {
         TestQCollection _testCollection;
@@ -270,7 +268,6 @@ namespace ModuleSoanDe
             return int.Parse(xml.Value);
         }
     }
-
     class XMLEmTestRootHandler : XMLTestRootHandler
     {
         EmTestQCollection _emTestCollection;
@@ -308,7 +305,6 @@ namespace ModuleSoanDe
 
 
     }
-
     //2
     class XMLQuestionNodeHandler
     {
@@ -324,7 +320,6 @@ namespace ModuleSoanDe
             return 0;
         }
     }
-
     class XMLWithAnswerQNodeHandler : XMLQuestionNodeHandler
     {
         public override XmlElement write(XmlDocument doc, XmlElement ele, int n, Question q)
@@ -341,7 +336,6 @@ namespace ModuleSoanDe
             return int.Parse(xml.Value);
         }
     }
-
     //3
     class XMLCategoryAndTitleHandler
     {
@@ -367,7 +361,6 @@ namespace ModuleSoanDe
             q.Title = xml.ReadElementContentAsString();
         }
     }
-
     //4 
     interface XMLChosenCorrectHandler
     {
@@ -375,7 +368,6 @@ namespace ModuleSoanDe
 
         void read(XmlReader xml, Question q);
     }
-
     class XMLCorrectIndexHandler : XMLChosenCorrectHandler
     {
         public void write(XmlDocument doc, XmlElement ele, Question q)
@@ -392,7 +384,6 @@ namespace ModuleSoanDe
             q.CorrectIndex = xml.ReadElementContentAsInt();
         }
     }
-
     class XMLChosenIndexHandler : XMLChosenCorrectHandler
     {
         public void write(XmlDocument doc, XmlElement ele, Question q)
@@ -409,7 +400,6 @@ namespace ModuleSoanDe
             q.ChosenIndex = xml.ReadElementContentAsInt();
         }
     }
-
     //5
     class XMLAnswerHandler
     {
