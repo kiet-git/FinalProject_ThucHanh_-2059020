@@ -11,7 +11,7 @@ namespace ModuleSoanDe
         List<TestQCollection> lstTest = new List<TestQCollection>();
 
         string selectedPath;
-        string defaultOutputPath = @"\result.txt";
+        string defaultOutputPath = @"result.txt";
 
         public FormChamBai()
         {
@@ -88,6 +88,8 @@ namespace ModuleSoanDe
                     if(emTest.Id == test.Id)
                     {
                         emTest.Mark = test.markTest(emTest);
+                        double temp = (double)emTest.Mark / emTest.Size * 10.0;
+                        emTest.Mark = (int)Math.Round(temp);
                     }
                 }
             }
@@ -98,6 +100,11 @@ namespace ModuleSoanDe
             lstEmTest.Sort(sortMark);
             NormalTextExecuter nre = new NormalTextExecuter();
             nre.write(lstEmTest, defaultOutputPath);
+
+            MessageBox.Show("Your mark is successfully saved in the designated directory!",
+                "Information!",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private int sortMark(EmTestQCollection a, EmTestQCollection b)

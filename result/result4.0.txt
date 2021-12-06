@@ -1,0 +1,5 @@
+Result of ITEC test: 
+Test Id: 2-2022 | Month: 2 | Year: 2022 | EmID: 123123 | EmName: dfsfsdfs | EmEmail: 12112@123123 | Mark: 11 out of 12
+Test Id: 1-2024 | Month: 1 | Year: 2024 | EmID: 3423424234 | EmName: sdgdsdfgsdfg | EmEmail: 3424@ddffd | Mark: 5 out of 5
+Test Id: 1-2021 | Month: 1 | Year: 2021 | EmID: 2 | EmName: 234 | EmEmail: 2@2 | Mark: 2 out of 4
+Test Id: 1-2021 | Month: 1 | Year: 2021 | EmID: 1 | EmName: 123 | EmEmail: 123@1 | Mark: 1 out of 4

@@ -11,11 +11,11 @@ namespace ModuleSoanDe
 
         public ProjectDirectory()
         {
-            _folderDir.Add("bankDir", getProjDirectory() + @"\bank\");
-            _folderDir.Add("answerDir", getProjDirectory() + @"\answer\");
-            _folderDir.Add("resultDir", getSolutionDirectory() + @"\result\");
-            _folderDir.Add("testDir", getSolutionDirectory() + @"\test\");
-            _folderDir.Add("credentialDir", getProjDirectory() + @"\credential\");
+            _folderDir.Add("bankDir", @"bank\");
+            _folderDir.Add("answerDir", @"answer\");
+            _folderDir.Add("resultDir", @"result\");
+            _folderDir.Add("testDir", @"test\");
+            _folderDir.Add("credentialDir", @"credential\");
         }
 
         public string getFolder(string name)

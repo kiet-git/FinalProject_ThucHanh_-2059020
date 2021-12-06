@@ -27,4 +27,14 @@
     <Folder Include="answer\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="bank\dataQuestion.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="credential\user.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  	
+	
 </Project>
